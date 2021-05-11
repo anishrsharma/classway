@@ -44,3 +44,7 @@ def app_add_answer(request):
 
 def app_view_question(request):
     return render(request, 'temp_app_classway/app_view_question.html')
+
+
+def app_view_question_student(request):
+    return render(request, 'temp_app_classway/app_view_question_student.html')

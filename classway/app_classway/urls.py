@@ -19,6 +19,8 @@ urlpatterns = [
 
     path('app_add_answer/', views.app_add_answer, name="app_add_answer"),
     path('app_view_question/', views.app_view_question, name="app_view_question"),
+    path('app_view_question_student/', views.app_view_question_student, name="app_view_question_student"),
+
 
     # path('app_class_performance/', views.app_class_performance, name="app_class_performance"),
 
