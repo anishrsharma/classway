@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* #03506f */
+
+.app-view-question {
+    background-color: #eeeeee;
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: auto;
+    position: relative;
+}
+
+.app-view-question .fa {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 10px;
+    color: #e05297;
+}
+
+.app-view-question .container1 {
+    /* border: 1px solid red; */
+    width: 50%;
+    padding: 20px;
+    color: #03506f;
+}
+
+.app-view-question .container1 h3 {
+    margin: 0 0 10px 0;
+}
+
+.app-view-question .container1 p {
+    /* margin: 0 0 10px 0; */
+    font-size: 13px;
+}
+
+.app-view-question hr {
+    margin: 10px 0;
+    opacity: 0.5;
+    height: 1px;
+    background-color: #03506f;
+    border: none;
+}
+
+.app-view-question .more p {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.app-view-question .container2 {
+    padding: 0 20px 20px 20px;
+    max-height: 80%;
+    /* padding-top: none; */
+    /* border: 1px solid rgb(0, 0, 0); */
+    overflow: auto;
+    width: 50%;
+}
+
+.app-view-question .container2 table {
+    border: 2px solid #03506f;
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 2px 2px 10px #e05297;
+}
+
+.app-view-question .container2 th, td {
+    border: 1px solid rgb(3, 80, 111, 0.5);
+    /* border: 1px solid #03506f; */
+    padding: 7px;
+    text-align: left;
+    font-size: 13px;
+    color: #03506f;
+}
+
+.app-view-question .container2 th {
+    color: #eeeeee;
+    position: sticky;
+    top: 0;
+    background-color: #03506f;
+    text-align: left;
+}
+
+.app-view-question .container2 .row-link {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.app-view-question .container2 .row-link:hover {
+    background-color: #a3ddcb;
+}
+
+@media (max-width:700px) {
+    .app-view-question {
+        flex-direction: column;
+    }
+    .app-view-question .container1 {
+        width: 90%;
+    }
+
+    .app-view-question .container2 {
+        width: 90%;
+    }
+}

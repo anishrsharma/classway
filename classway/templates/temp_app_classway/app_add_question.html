@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>new qn</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style_app_classway/app_add_question.css'%}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+	<div class="user_class_addquestion">
+
+		<abbr title="back">
+			<a href="javascript:void(0)" class="btn-back">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</abbr>
+
+		<form>
+
+			{% csrf_token %}
+
+			<h3>add new question</h3>
+
+			<textarea name="question" placeholder="enter question here..."></textarea>
+			<div class="container">
+				<input type="number" name="marks" value="" placeholder="marks">
+				<input type="date" name="duedate" value="" placeholder="due date">
+			</div>
+
+			<button type="submit">add</button>
+		</form>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$('.btn-back').click(function () {
+				$.ajax({
+					url: '/classes/user_class_classdetails',
+
+					success: function (result) {
+						console.log('success back btn in addqn...');
+						$('.working-area').html(result);
+					}
+				});
+			});
+		})
+	</script>
+</body>
+
+</html>

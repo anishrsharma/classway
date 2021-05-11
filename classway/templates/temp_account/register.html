@@ -1,0 +1,65 @@
+{% extends 'temp_website/home.html' %}
+
+{% load static %}
+
+{% block title %}classway | register{% endblock %}
+
+{% block local_link %}
+<link rel="stylesheet" href="{% static 'css/style_website/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/style_account/join.css' %}">
+{% endblock  %}
+
+
+
+
+
+{% block nav_home %}/home/{% endblock %}
+
+{% block nav_register %}#{% endblock %}
+
+
+{% block active_login %}{% endblock  %}
+{% block active_home %}{% endblock  %}
+{% block active_register %}active{% endblock  %}
+
+
+
+{% block header_heading %}        
+
+<div class="box1">
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {% if msg %}
+            
+        <p id="msg" style="font-size: 12px; color:rgb(57, 62, 70, 0.9); text-align:center;">*{{msg}}*</p>
+        
+        {% endif %}
+
+        
+
+        {{register_form_obj.first_name}}
+        {{register_form_obj.last_name}}
+        {{register_form_obj.email}}
+        {{register_form_obj.password}}
+        {{register_form_obj.password2}}
+
+
+
+
+        <div class="btn">
+            <button type="submit" name="btn-signup">register</button>
+        </div>
+        <p style="font-size: 12px; text-align: center;">already have an account?
+            <a href="login">login</a>
+        </p>
+    </form>
+
+</div>
+{% endblock  %}
+
+
+
+{% block section %}
+{% endblock  %}

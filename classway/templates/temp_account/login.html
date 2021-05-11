@@ -1,0 +1,62 @@
+{% extends 'temp_account/register.html' %}
+
+{% load static %}
+
+{% block title %}classway | login{% endblock  %}
+
+
+{% block nav_home %}/home/{% endblock %}
+
+{% block nav_register %}/account/register/{% endblock %}
+{% block nav_login %}#{% endblock %}
+
+
+
+
+{% block active_home %}{% endblock  %}
+{% block active_register %}{% endblock  %}
+
+{% block active_login %}active{% endblock  %}
+
+
+
+
+
+{% block header_heading %}
+
+<div class="box1">
+
+    <form action="" method="POST">
+
+
+        {% if msg %}
+            
+        <p id="msg" style="font-size: 12px; color:black; text-align:center;">*{{msg}}*</p>
+        
+        {% endif %}
+
+        {% csrf_token %}
+
+
+        {{login_form_obj.email}}
+        {{login_form_obj.password}}
+
+        {% comment %} {{login_form_obj.password}} {% endcomment %}
+
+        <div class="btn">
+            <button type="submit" name="btn-login">login</button>
+        </div>
+        <p style="font-size: 12px; text-align: center;">don't have an account?
+            <a href="signup">signup</a>
+        </p>
+    </form>
+
+</div>
+{% endblock  %}
+
+
+
+{% block section %}
+{% endblock  %}
+
+
