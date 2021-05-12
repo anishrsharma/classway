@@ -182,7 +182,7 @@
 			// back btn
 			$('.btn-back').click(function () {
 				$.ajax({
-					url: '/classes/user_class_availableclass',
+					url: '/app_classway/app_available_class',
 
 					success: function (result) {
 						console.log('success back btn in classdetails...');
@@ -205,7 +205,7 @@
 			});
 
 			$('.row-link').click(function () {
-				$('.user_class_classdetails').load('/app_classway/app_add_answer');
+				$('.user_class_classdetails').load('/app_classway/app_view_question');
 
 			});
 

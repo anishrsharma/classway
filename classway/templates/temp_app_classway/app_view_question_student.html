@@ -69,6 +69,21 @@
 
     </div>
 
+	<script>
+		$(document).ready(function () {
+			$('.btn-back').click(function () {
+				$.ajax({
+					url: '/app_classway/app_view_question',
+					
+
+					success: function (result) {
+						console.log('success back btn in classperformance...');
+						$('.working-area').html(result);
+					}
+				});
+			});
+		})
+	</script>
 </body>
 
 </html>
