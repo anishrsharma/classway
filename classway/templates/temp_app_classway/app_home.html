@@ -18,7 +18,7 @@
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -76,10 +76,17 @@
                     <hr>
                     <button class="btn-classes">classes</button>
                     <hr>
+                    <button class="btn-my-classes">my classes</button>
+                    <hr>
+                    <button class="btn-new-class">new class</button>
+                    <hr>
                     <button class="btn-todo">todo</button>
                     <hr>
                     <button class="btn-status">status</button>
                     <hr>
+                    <button class="btn-account">account</button>
+                    <hr>
+
                 </ul>
             </div>
 
@@ -107,7 +114,7 @@
 
             });
 
-       
+
 
             $('.btn-classes').click(function () {
                 $.ajax({
@@ -119,7 +126,31 @@
                     }
                 });
 
-                $('.btn-status, .btn-todo').css({
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                    "background-color": "",
+                    "color": ""
+                });
+
+                $(this).css({
+                    "background-color": "#eeeeee",
+                    "color": "#393e46"
+                });
+            });
+            
+
+
+            /////////////////////
+            $('.btn-my-classes').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_available_class',
+
+                    success: function (result) {
+                        console.log('success');
+                        $('.working-area').html(result);
+                    }
+                });
+
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                     "background-color": "",
                     "color": ""
                 });
@@ -132,25 +163,60 @@
 
 
 
+            ////////////////////////////
+            $('.btn-new-class').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_available_class',
+
+                    success: function (result) {
+                        console.log('success');
+                        $('.working-area').html(result);
+                    }
+                });
+
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                    "background-color": "",
+                    "color": ""
+                });
+
+                $(this).css({
+                    "background-color": "#eeeeee",
+                    "color": "#393e46"
+                });
+            });
+            /////////////////////////
             $('.btn-todo').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_available_class',
 
-                $('.btn-classes, .btn-status').css({
+                    success: function (result) {
+                        console.log('success');
+                        $('.working-area').html(result);
+                    }
+                });
+
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                     "background-color": "",
                     "color": ""
                 });
-
 
                 $(this).css({
                     "background-color": "#eeeeee",
                     "color": "#393e46"
                 });
-
-                //$('#working-area').load('/classes/user_class_fresher');
-
             });
+            /////////////////////////////
             $('.btn-status').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_available_class',
 
-                $('.btn-classes, .btn-todo').css({
+                    success: function (result) {
+                        console.log('success');
+                        $('.working-area').html(result);
+                    }
+                });
+
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                     "background-color": "",
                     "color": ""
                 });
@@ -159,10 +225,29 @@
                     "background-color": "#eeeeee",
                     "color": "#393e46"
                 });
-
-                //$('#working-area').load('/classes/user_class_fresher');
-
             });
+            //////////////////////////
+            $('.btn-account').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_available_class',
+
+                    success: function (result) {
+                        console.log('success');
+                        $('.working-area').html(result);
+                    }
+                });
+
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                    "background-color": "",
+                    "color": ""
+                });
+
+                $(this).css({
+                    "background-color": "#eeeeee",
+                    "color": "#393e46"
+                });
+            });
+            //////////////////
         });
 
 
