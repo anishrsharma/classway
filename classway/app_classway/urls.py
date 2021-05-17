@@ -12,6 +12,8 @@ urlpatterns = [
 
 
     path('app_available_class/', views.app_available_class, name="app_available_class"),
+    path('app_available_class_enrolled/', views.app_available_class_enrolled, name="app_available_class_enrolled"),
+
     path('app_class_details/', views.app_class_details, name="app_class_details"),
     path('app_add_question/', views.app_add_question, name="app_add_question"),
     path('app_class_performance/', views.app_class_performance, name="app_class_performance"),

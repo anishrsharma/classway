@@ -47,8 +47,8 @@
 
             <i style="color: #eeeeee;">user: {{request.session.logged_in_user}}</i>
 
-            <a href="/account/logout" class="btn-account">
-                <i class="material-icons">person</i> logout
+            <a style="font-size: 13px; color: rgb(10, 4, 60);" href="/app_classway/app_join_class" class="btn-account" id="btn-join">
+                <i  class="material-icons">post_add</i> join class
             </a>
 
 
@@ -130,7 +130,7 @@
 
                 switch (clickedAttr) {
                     case 'btn-classes':
-                        link = "/app_classway/app_available_class/"; break;
+                        link = "/app_classway/app_available_class_enrolled/"; break;
 
                     case 'btn-my-classes':
                         link = "/app_classway/app_available_class/"; break;
@@ -182,6 +182,36 @@
             }
             clicked = !clicked;
         }
+
+
+        $(document).ready(function () {
+            var frm = $('#btn-join');
+            frm.click(function () {
+                $.ajax({
+                    //type: 'POST',
+                    url: '/app_classway/app_join_class/',
+                    //data: frm.serialize(),
+                    success: function (result) {
+                        $('.working-area').html(result);
+
+                        $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                            "background-color": "",
+                            "color": ""
+                        });
+
+                  
+                    }
+
+                });
+                return false;
+
+
+
+            });
+
+
+        });
+
 
 
     </script>

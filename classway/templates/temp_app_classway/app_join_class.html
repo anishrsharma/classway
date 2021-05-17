@@ -15,16 +15,53 @@
 
 <body>
     <div class="user_class_joinclass">
-        <!-- <i class="fa fa-arrow-left"></i> -->
-        <a href="">
-            <i class="fa fa-angle-left"></i>
-        </a>
-        <form action="">
+        <p>{{msg}}</p>
+        <form action="" id="frm-join-class">
+            {% csrf_token %}
             <h3>join class</h3>
-            <input type="text" name="" id="" placeholder="enter code">
+
+            {{join_class_form.class_code}}
             <button class="btn-join" type="submit">join</button>
         </form>
     </div>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            var frm = $('#frm-join-class');
+            frm.submit(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/app_classway/app_join_class/',
+                    data: frm.serialize(),
+                    success: function (result) {
+                        $('.working-area').html(result);
+
+                        $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                            "background-color": "",
+                            "color": ""
+                        });
+
+                   
+                    },
+                    error: function (result) {
+                        //$("#MESSAGE-DIV").html("Something went wrong!");
+                        console.log('error...')
+                    }
+                });
+                return false;
+
+
+
+            });
+
+
+        });
+    </script>
+
+
 </body>
 
 </html>
