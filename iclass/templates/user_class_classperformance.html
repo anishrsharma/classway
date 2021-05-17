@@ -1,0 +1,215 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>class_performance</title>
+	<link rel="stylesheet" href="{% static 'css/user_class_base.css'%}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+	<div class="user_class_classperformance">
+
+		<abbr title="back">
+			<a href="javascript:void(0)" class="btn-back">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</abbr>
+
+
+		<h3>class performance</h3>
+
+		<div class="tables">
+			<table>
+				<tr class="row-heading">
+					<th>sn</th>
+					<th>rank</th>
+					<th>student</th>
+					<th>attempts</th>
+					<th>score</th>
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+				<tr>
+					<td>1.</td>
+					<td>1st</td>
+					<td>jon</td>
+					<td>80/85</td>
+					<td>150/160</td>
+
+				</tr>
+
+
+			</table>
+		</div>
+
+
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$('.btn-back').click(function () {
+				$.ajax({
+					url: '/classes/user_class_classdetails',
+
+					success: function (result) {
+						console.log('success back btn in classperformance...');
+						$('.working-area').html(result);
+					}
+				});
+			});
+		})
+	</script>
+
+
+</body>
+
+</html>
