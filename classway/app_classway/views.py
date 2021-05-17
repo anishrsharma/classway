@@ -89,12 +89,18 @@ def app_available_class(request):
     # fetching classes created by this user_id
     obj_user_classes = Class.objects.filter(class_admin=user_id)
 
+
     # fetching total user enrolled each classes
     obj_user_enrolls_count = Enroll.objects.all().count()
 
+    # -------------------------
 
-    # temp2 = Enroll.objects.filter(user_id=user_id)
-    # obj_user_enrolled =     
+    test = Enroll.objects.select_related(Class)
+    for i in test:
+        print(i)
+
+
+    # -------------------------
 
 
 
