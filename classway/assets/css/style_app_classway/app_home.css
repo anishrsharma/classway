@@ -2,9 +2,13 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* font-family: 'Roboto Mono', monospace; */
-    /* font-family: 'Dosis', sans-serif; */
     font-family: 'Roboto', sans-serif;
+    outline: none;
+}
+
+@font-face {
+    font-family: font-logo;
+    src: url(/static/font/space-age.woff);
 }
 
 .first-nav {
@@ -15,7 +19,6 @@
     height: 7vh;
     /* background: #0a043c; */
     background: linear-gradient(to right, rgba(10, 4, 60, 1), rgba(10, 4, 60, 0.9));
-
 }
 
 .first-nav .fa {
@@ -35,13 +38,13 @@
     display: none;
 }
 
-
 .first-nav label {
     /* border: 1px solid red; */
     font-size: 30px;
     color: #eeeeee;
     cursor: pointer;
     /* text-decoration: none; */
+    font-family: font-logo;
 }
 
 .first-nav a {
@@ -74,7 +77,6 @@
 .first-nav .btn-account:hover {
     /* opacity: 0.8; */
     background-color: #e05297;
-
 }
 
 @media(max-width:750px) {
@@ -101,11 +103,8 @@
     height: 3vh;
     /* background-color: rgba(0, 0, 0, 0.8); */
     background-color: rgb(3, 80, 111);
-
     display: flex;
     align-items: center;
-
-
 }
 
 .breadcrumb ul {
@@ -118,7 +117,6 @@
     justify-content: left;
     align-items: center;
     margin-left: 20%;
-
 }
 
 .breadcrumb ul i {
@@ -167,6 +165,11 @@
     background-color: rgb(3, 80, 111);
     background: linear-gradient(rgba(3, 80, 111, 1), rgba(3, 80, 111, 0.9));
     box-shadow: 4px 4px 10px red;
+    background-image: linear-gradient(rgba(3, 80, 111, 1), rgba(3, 80, 111, 0.9)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .side-nav ul {
@@ -174,6 +177,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.side-nav-active {
+    background-color: #ffffff;
 }
 
 .side-nav ul button {
@@ -186,6 +193,8 @@
     background-color: transparent;
     transition: 0.2s;
     text-transform: uppercase;
+    /* font-weight: lighter; */
+    letter-spacing: 1px;
 }
 
 .side-nav ul button:hover {

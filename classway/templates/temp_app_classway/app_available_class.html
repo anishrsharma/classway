@@ -15,155 +15,70 @@
 
 <body>
 	<div class="user_class_availableclass">
-		<a href="">
+		<!-- <a href="">
 			<i class="fa fa-angle-left"></i>
-		</a>
+		</a> -->
 
 		<div class="container-class">
 
-			<div class="class-box">
-				<div class="class-box-name">
-					<h2>
-						class A
-					</h2>
-				</div>
 
-				<div class="class-box-info">
-					<ul>
-						<li>subject: physics</li>
-						<li>students: 90</li>
-					</ul>
-				</div>
 
-				<div class="options">
-					<a href="javascript:void(0)" class="members">
-						<abbr class="abbr" title="members">
-							<i class="material-icons">supervisor_account</i>
-						</abbr>
-					</a>
-					<a href="javascript:void(0)" class="edit">
-						<abbr title="edit">
-							<i class="material-icons">mode_edit</i>
-						</abbr>
+			{% if created_class %}
+			
+				
+				{% for obj in created_class %}
 
-					</a>
-					<a href="javascript:void(0)" class="delete">
-						<abbr title="delete">
-							<i class="material-icons">delete</i>
-						</abbr>
-					</a>
 
-					<div class="more" onclick="dropdown('more_x')">
-					<!-- more_x ko dynamically pass kra denge -->
+				<div class="class-box">
+					<div class="class-box-name">
+						<h2>
+							{{obj.class_name}}
+						</h2>
+					</div>
 
-						<abbr title="more">
-							<i class="material-icons">more_vert</i>
-						</abbr>
+					<div class="class-box-info">
+						<ul>
+							<li>subject: {{obj.class_subject}}</li>
+							<li>students: {{enroll_count}}</li>
+							<li>code: {{obj.class_code}}</li>
 
-						<div class="container-dropdown" id="more_x">
-							<!-- more_x id isliye disya gya h taki iss id ke name se 
-							iss content/box ko diaplay kr sake -->
-							<a href="">add member</a>
-							<a href="">remove member</a>
-							<a href="">drop3</a>
-						</div>
+						</ul>
+					</div>
+
+					<div class="options">
+
+						<a href="javascript:void(0)" class="edit">
+							<abbr title="edit">
+								<i class="material-icons">mode_edit</i>
+							</abbr>
+
+						</a>
+						<a href="javascript:void(0)" class="delete">
+							<abbr title="delete">
+								<i class="material-icons">delete</i>
+							</abbr>
+						</a>
+
+
 					</div>
 				</div>
-			</div>
+
+				{% endfor %}
+
+
+			{% else %}
+
+				<p>no class created</p>
+
+			{% endif %}
+
 			<!-- </a> -->
 			<!-- <a href=""> -->
-			<div class="class-box">
-				<div class="class-box-name">
-					<h2>
-						class A
-					</h2>
-				</div>
 
-				<div class="class-box-info">
-					<ul>
-						<li>subject: physics</li>
-						<li>students: 90</li>
-					</ul>
-				</div>
 
-				<div class="options">
-					<a href="" class="members">
-						<abbr class="abbr" title="members">
-							<i class="material-icons">supervisor_account</i>
-						</abbr>
-					</a>
-					<a href="#" class="edit">
-						<abbr title="edit">
-							<i class="material-icons">mode_edit</i>
-						</abbr>
 
-					</a>
-					<a href="#" class="delete">
-						<abbr title="delete">
-							<i class="material-icons">delete</i>
-						</abbr>
-					</a>
-					<div class="more" onclick="dropdown('more_y')">
-						<abbr title="more">
-							<i class="material-icons">more_vert</i>
-						</abbr>
 
-						<div class="container-dropdown" id="more_y">
-							<a href="">add member</a>
-							<a href="">remove member</a>
-							<a href="">drop3</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- </a> -->
 
-			<!-- <a href=""> -->
-			<div class="class-box">
-				<div class="class-box-name">
-					<h2>
-						class A
-					</h2>
-				</div>
-
-				<div class="class-box-info">
-					<ul>
-						<li>subject: physics</li>
-						<li>students: 90</li>
-					</ul>
-				</div>
-
-				<div class="options">
-					<a href="" class="members">
-						<abbr class="abbr" title="members">
-							<i class="material-icons">supervisor_account</i>
-						</abbr>
-					</a>
-					<a href="#" class="edit">
-						<abbr title="edit">
-							<i class="material-icons">mode_edit</i>
-						</abbr>
-
-					</a>
-					<a href="#" class="delete">
-						<abbr title="delete">
-							<i class="material-icons">delete</i>
-						</abbr>
-					</a>
-					<div class="more more2" onclick="dropdown('more_z')">
-						<abbr title="more">
-							<i class="material-icons">more_vert</i>
-						</abbr>
-
-						<div class="container-dropdown" id="more_z">
-							<a href="">add member</a>
-							<a href="">remove member</a>
-							<a href="">drop3</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- </a> -->
 
 
 
@@ -198,13 +113,13 @@
 	<script>
 
 		$(document).ready(function () {
-			
+
 
 			$('.class-box-name, .class-box-info').click(function () {
 				$.ajax({
-					url:'/app_classway/app_class_details',
-	
-					success:function(result){
+					url: '/app_classway/app_class_details',
+
+					success: function (result) {
 						console.log('success');
 						$('.working-area').html(result);
 					}
@@ -258,15 +173,15 @@
 
 
 		var drop = true;
-		function dropdown(classname){
+		function dropdown(classname) {
 
 			let a = document.getElementById(classname);
 
 			if (drop) {
-				a.style.display = 'flex'; 
+				a.style.display = 'flex';
 
 			} else {
-				a.style.display = 'none'; 
+				a.style.display = 'none';
 
 			}
 

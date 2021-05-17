@@ -3,8 +3,17 @@
     margin: 0;
     box-sizing: border-box;
     /* background: #eeeeee; */
-    font-family: 'Roboto Mono', monospace;
+    /* font-family: 'Roboto Mono', monospace; */
+    font-family: 'Roboto', sans-serif;
+
 }
+
+
+@font-face {
+    font-family: font-logo;
+    src: url(/static/font/space-age.woff);
+}
+
 
 
 /* ----------header---------- */
@@ -21,6 +30,8 @@ header {
     background-position: center;
     background-size: cover;
 }
+
+
 
 header nav {
     /* border: 1px solid black; */
@@ -42,6 +53,7 @@ header nav label {
     font-size: 35px;
     color: #eeeeee;
     cursor: pointer;
+    font-family: font-logo;
 }
 
 .ul-1 {

@@ -11,6 +11,14 @@ def home_page(request):
     return render(request, 'temp_website/home.html')
 
 
+
+
+def home_page_bypass(request):
+    return render(request, 'temp_website/home.html')
+
+
+
+
 def register_page(request):
     return render(request, 'temp_website/register.html')
 

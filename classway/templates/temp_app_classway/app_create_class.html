@@ -15,30 +15,64 @@
 <body>
     <div class="user_class_createclass">
 
-        <a href="">
+        <!-- <a href="">
             <i class="fa fa-angle-left"></i>
-        </a>
+        </a> -->
 
-        <form action="">
+        <form id="frm-create-class">
             {% csrf_token %}
-
-            <input type="text" name="" id="" placeholder="class name">
-            <input type="text" name="" id="" placeholder="subject">
+            <h3>new class</h3>
 
 
+            {{create_class_form.class_name}}
+            {{create_class_form.class_subject}}
 
 
-            <div class="r-btn">
-                <input type="radio" id="" name="r-btn" value="private">
-                <label for="private">private</label><br>
-                <input type="radio" id="" name="r-btn" value="public">
-                <label for="public">public</label>
-            </div>
 
-            <button type="submit" class="btn-create">create</button>
+            <button type="submit" name="btn-create" class="btn-create">create</button>
 
         </form>
     </div>
+
+
+    <script>
+        $(document).ready(function () {
+            var frm = $('#frm-create-class');
+            frm.submit(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/app_classway/app_create_class/',
+                    data: frm.serialize(),
+                    success: function (result) {
+                        $('.working-area').html(result);
+
+                        $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                            "background-color": "",
+                            "color": ""
+                        });
+
+                        $('.btn-my-classes').css({
+                            "background-color": "#eeeeee",
+                            "color": "#393e46"
+                        });
+                    },
+                    error: function (result) {
+                        //$("#MESSAGE-DIV").html("Something went wrong!");
+                        console.log('error...')
+                    }
+                });
+                return false;
+
+
+
+            });
+
+
+        });
+
+    </script>
+
+
 </body>
 
 </html>

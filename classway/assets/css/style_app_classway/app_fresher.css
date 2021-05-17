@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -13,6 +13,11 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .user_class_fresher .txt {
@@ -20,7 +25,7 @@
 }
 
 .user_class_fresher .txt p {
-    color: #393e46;
+    color: rgb(3, 80, 111);
     font-size: 13px;
 }
 
@@ -36,7 +41,9 @@
     margin: 20px;
     padding: 9px;
     cursor: pointer;
-    background-color: rgb(57, 62, 70, 0.9);
+    /* background-color: rgb(10, 4, 60); */
+    background-color: rgb(3, 80, 111);
+
     color: #eeeeee;
     border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -46,5 +53,6 @@
 }
 
 .user_class_fresher .btn button:hover {
-    background-color: rgb(57, 62, 70, 0.8);
+    /* background-color: rgb(57, 62, 70, 0.8); */
+    opacity: 0.8;
 }

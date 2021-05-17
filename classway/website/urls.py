@@ -5,6 +5,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home_page, name="home_page"),
+    path('bypass/', views.home_page_bypass, name="home_page_bypass"),
+
     path('home/', views.home_page, name="home_page"),
 
     # path('about/', views.about_page, name="about_page"),

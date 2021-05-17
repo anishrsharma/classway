@@ -40,7 +40,7 @@
             <i class="fa fa-caret-right" id="b" onclick="toggleArrow()"></i>
 
 
-            <a href="/website/">
+            <a href="/website/bypass/">
                 <label for=" ">classway</label>
             </a>
 
@@ -74,17 +74,17 @@
             <div class="side-nav ">
                 <ul>
                     <hr>
-                    <button class="btn-classes">classes</button>
+                    <button id="btnm" class="btn-classes">classes</button>
                     <hr>
-                    <button class="btn-my-classes">my classes</button>
+                    <button id="btnm" class="btn-my-classes">my classes</button>
                     <hr>
-                    <button class="btn-new-class">new class</button>
+                    <button id="btnm" class="btn-new-class">new class</button>
                     <hr>
-                    <button class="btn-todo">todo</button>
+                    <button id="btnm" class="btn-todo">todo</button>
                     <hr>
-                    <button class="btn-status">status</button>
+                    <button id="btnm" class="btn-status">status</button>
                     <hr>
-                    <button class="btn-account">account</button>
+                    <button id="btnm" class="btn-account">account</button>
                     <hr>
 
                 </ul>
@@ -114,17 +114,8 @@
 
             });
 
-
-
-            $('.btn-classes').click(function () {
-                $.ajax({
-                    url: '/app_classway/app_available_class',
-
-                    success: function (result) {
-                        console.log('success');
-                        $('.working-area').html(result);
-                    }
-                });
+            $(document).on("click", "#btnm", function () {
+                var clickedAttr = $(this).attr('class'); // or var clickedBtnID = this.class
 
                 $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                     "background-color": "",
@@ -135,119 +126,43 @@
                     "background-color": "#eeeeee",
                     "color": "#393e46"
                 });
-            });
-            
 
 
-            /////////////////////
-            $('.btn-my-classes').click(function () {
+                switch (clickedAttr) {
+                    case 'btn-classes':
+                        link = "/app_classway/app_available_class/"; break;
+
+                    case 'btn-my-classes':
+                        link = "/app_classway/app_available_class/"; break;
+
+                    case 'btn-new-class':
+                        link = "/app_classway/app_create_class/"; break;
+
+                    case 'btn-todo':
+                        link = "/app_classway/app_available_class/"; break;
+
+                    case 'btn-status':
+                        link = "/app_classway/app_available_class/"; break;
+
+                    case 'btn-account':
+                        link = "/app_classway/app_available_class/"; break;
+
+                    default:
+                        console.log('error...');
+                }
+
+
                 $.ajax({
-                    url: '/app_classway/app_available_class',
-
+                    url: link,
                     success: function (result) {
-                        console.log('success');
                         $('.working-area').html(result);
                     }
                 });
 
-                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
-                    "background-color": "",
-                    "color": ""
-                });
 
-                $(this).css({
-                    "background-color": "#eeeeee",
-                    "color": "#393e46"
-                });
+
             });
 
-
-
-            ////////////////////////////
-            $('.btn-new-class').click(function () {
-                $.ajax({
-                    url: '/app_classway/app_available_class',
-
-                    success: function (result) {
-                        console.log('success');
-                        $('.working-area').html(result);
-                    }
-                });
-
-                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
-                    "background-color": "",
-                    "color": ""
-                });
-
-                $(this).css({
-                    "background-color": "#eeeeee",
-                    "color": "#393e46"
-                });
-            });
-            /////////////////////////
-            $('.btn-todo').click(function () {
-                $.ajax({
-                    url: '/app_classway/app_available_class',
-
-                    success: function (result) {
-                        console.log('success');
-                        $('.working-area').html(result);
-                    }
-                });
-
-                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
-                    "background-color": "",
-                    "color": ""
-                });
-
-                $(this).css({
-                    "background-color": "#eeeeee",
-                    "color": "#393e46"
-                });
-            });
-            /////////////////////////////
-            $('.btn-status').click(function () {
-                $.ajax({
-                    url: '/app_classway/app_available_class',
-
-                    success: function (result) {
-                        console.log('success');
-                        $('.working-area').html(result);
-                    }
-                });
-
-                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
-                    "background-color": "",
-                    "color": ""
-                });
-
-                $(this).css({
-                    "background-color": "#eeeeee",
-                    "color": "#393e46"
-                });
-            });
-            //////////////////////////
-            $('.btn-account').click(function () {
-                $.ajax({
-                    url: '/app_classway/app_available_class',
-
-                    success: function (result) {
-                        console.log('success');
-                        $('.working-area').html(result);
-                    }
-                });
-
-                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
-                    "background-color": "",
-                    "color": ""
-                });
-
-                $(this).css({
-                    "background-color": "#eeeeee",
-                    "color": "#393e46"
-                });
-            });
-            //////////////////
         });
 
 

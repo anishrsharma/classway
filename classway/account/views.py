@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import User
 from .forms import ModelFormRegister, ModelFormLogin
+
+from django.contrib.sessions.models import Session
 # Create your views here.
 
 
@@ -91,7 +93,9 @@ def login(request):
 
 def logout(request):
     if 'logged_in_user' in request.session:
-        del request.session['logged_in_user']
+        # del request.session['logged_in_user']
+        Session.objects.all().delete()
         return redirect('/website/')
     else:
-        pass
+        return redirect('/website/')
+        

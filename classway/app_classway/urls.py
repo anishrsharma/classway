@@ -16,6 +16,9 @@ urlpatterns = [
     path('app_add_question/', views.app_add_question, name="app_add_question"),
     path('app_class_performance/', views.app_class_performance, name="app_class_performance"),
 
+    path('app_no_class/', views.app_no_class, name="app_no_class"),
+
+
 
     path('app_add_answer/', views.app_add_answer, name="app_add_answer"),
     path('app_view_question/', views.app_view_question, name="app_view_question"),

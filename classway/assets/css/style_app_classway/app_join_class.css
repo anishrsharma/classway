@@ -35,16 +35,23 @@
     align-items: center;
 }
 
+.user_class_joinclass form h3 {
+    color: rgb(3, 80, 111);
+    text-transform: uppercase;
+    margin: 0 0 20px 0 ;
+}
+
+
 .user_class_joinclass form input {
     padding: 8px;
     background-color: #eeeeee;
-    border: 2px solid rgb(34, 40, 49, 0.6);
+    border: 2px solid rgb(3, 80, 111);
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
-    color: #222831;
+    color: #03506f;
     width: 200px;
     margin: 15px auto;
     text-align: center;
@@ -54,7 +61,7 @@
     width: 100px;
     border: 0px solid;
     padding: 8px;
-    background-color: #222831;
+    background-color: rgb(3, 80, 111);
     color: #eeeeee;
     border-radius: 3px;
     -webkit-border-radius: 3px;

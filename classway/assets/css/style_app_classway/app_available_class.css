@@ -1,10 +1,8 @@
-
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
 
 .user_class_availableclass {
     width: 100%;
@@ -12,22 +10,26 @@
     background-color: #eeeeee;
     overflow-y: scroll;
     position: relative;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 
-.user_class_availableclass::-webkit-scrollbar {
+/* .user_class_availableclass::-webkit-scrollbar {
     display: none;
-}
+} */
 
 /* Hide scrollbar for IE, Edge and Firefox */
 
-.user_class_availableclass {
+/* .user_class_availableclass {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
-}
+} */
 
 .user_class_availableclass a:only-of-type {
     font-size: 30px;
@@ -67,6 +69,7 @@
     /* cursor: pointer; */
     box-shadow: 2px 2px 10px #e05297;
     transition: 0.1s;
+    background-color: #eeeeee;
 }
 
 .user_class_availableclass .class-box:hover {
@@ -102,17 +105,18 @@
 }
 
 .user_class_availableclass .options {
+    padding: 0 20px;
     margin-top: 10px;
     /* border-top: 1px solid red; */
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .user_class_availableclass .options a {
     /* border: 1px solid red; */
-    padding: 0 5px; 
+    padding: 0 5px;
     color: #03506f;
 }
 
@@ -268,5 +272,3 @@
         width: 300px;
     }
 }
-
-
