@@ -8,7 +8,7 @@ class Class(models.Model):
     # class_id = models.IntegerField()
     class_name = models.CharField(max_length=100)
     class_subject = models.CharField(max_length=200)
-    class_code = models.CharField(max_length=8)
+    class_code = models.CharField(max_length=7)
     # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     class_admin = models.CharField(max_length=100)
 

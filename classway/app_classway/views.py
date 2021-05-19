@@ -71,8 +71,6 @@ def app_create_class(request):
 ##############################################################################
 
 
-
-
 ##############################################################################
 
 
@@ -113,27 +111,6 @@ def app_available_class(request):
 ##############################################################################
 
 
-# ***
-def app_available_class_enrolled(request):
-
-    user_email = request.session['logged_in_user']
-
-    # fetching user id with the help of user email
-    temp = User.objects.filter(email=user_email)
-    for i in temp:
-        user_id = i.id
-
-    user_email
-    obj_class_id = Enroll.objects.filter(user_id=user_id)
-
-    for i in obj_class_id:
-        print(i)
-
-    return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
-        # 'created_class': obj_user_classes,
-        # 'enroll_count': obj_user_enrolls_count
-    })
-
 
 ##############################################################################
 
@@ -165,6 +142,17 @@ def app_view_question(request):
 def app_view_question_student(request):
     return render(request, 'temp_app_classway/app_view_question_student.html')
 
+def app_account_page(request):
+    return render(request, 'temp_app_classway/app_account_page.html')
+
+
+def app_status_page(request):
+    return render(request, 'temp_app_classway/app_status_page.html')
+
+
+def app_todo_page(request):
+    return render(request, 'temp_app_classway/app_todo_page.html')
+
 
 ######################################################################################
 ######################################################################################
@@ -177,6 +165,16 @@ def generate_unique_code():
     return str(code)
 
 
+######################################################################################
+######################################################################################
+######################################################################################
+######################################################################################
+
+
+######################################################################################
+######################################################################################
+######################################################################################
+######################################################################################
 
 
 ######################################################################################
@@ -186,77 +184,116 @@ def generate_unique_code():
 
 
 
-######################################################################################
-######################################################################################
-######################################################################################
-######################################################################################
+# ***
+def app_available_class_enrolled(request):
+
+    user_email = request.session['logged_in_user']
+
+    
 
 
 
-######################################################################################
-######################################################################################
-######################################################################################
-######################################################################################
+    return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
+        # 'created_class': obj_user_classes,
+        # 'enroll_count': obj_user_enrolls_count
+    })
 
 
 
 
+
+
+
+
+
+
+
+
+# *** done ***
 def app_join_class(request):
+
     if request.method == 'POST':
         print('post')
 
         form_obj = ModelFormJoinClass(request.POST)
 
         if form_obj.is_valid():
-            class_code = form_obj.cleaned_data['class_code']
-            print("class_code:",class_code)
+            print('form valid')
 
-            current_user_email = request.session['logged_in_user']
-            print('current_user_email:',current_user_email)
+            user_code = form_obj.cleaned_data['class_code']
+            print('user_code:', user_code)
 
-            temp = User.objects.filter(email=current_user_email)
-            for i in temp:
-                current_user_id = i.id
 
-            print("current_user_id:",current_user_id)
+            # getting current user id:
+            obj_current_user_id = User.objects.filter(
+                email=request.session['logged_in_user'])
 
-            present_codes = Class.objects.values_list('class_code', flat=True)
+            current_user_id = obj_current_user_id[0].id
+            print('current_user_id:', current_user_id)
 
-            # print(present_codes)
+            get_code = Class.objects.filter(class_code=user_code)
 
-            # getting class id
-            temp1 = Class.objects.filter(class_code=class_code)
-            for k in temp1:
-                class_id = k.id
-            
-            # print("class id:",class_id)
+            if get_code:
+                class_id = get_code[0].id
+                class_admin = get_code[0].class_admin
 
-            # getting admin id
-            temp2 = Class.objects.filter(class_admin=current_user_id)
-            for k in temp2:
-                admin_id = k.class_admin
-            print("admin id:",admin_id)
-            
+                # print("type class_admin",type(class_admin))
+                # print("type current_user_id",type(current_user_id))
 
-            all_good = False
+                # getting class code
+                obj_get_class_id = Class.objects.filter(class_code=user_code)
+                class_id = obj_get_class_id[0].id
 
-            for i in present_codes:
-                if i == class_code:
-                    if admin_id != current_user_id:
-                        all_good = True
-                        break
-                    else:
-                        msg = 'error -> admin = current_user'
+                print("class id:", class_id)
+
+                # check_class_id_enroll = Enroll.objects.filter(
+                # class_id=class_id)
+
+                # check_user_id_enroll = Enroll.objects.filter(
+                # user_id=current_user_id)
+
+                if Enroll.objects.filter(user_id=current_user_id, class_id=class_id).exists():
+                    print('user exists in this class')
+                    msg = 'already enrolled...'
+                    return render(request, 'temp_app_classway/app_join_class.html', {
+                        'join_class_form': form_obj,
+                        'msg':msg
+                    })
                 else:
-                    msg = 'error -> code not found'
+                    print('user does not exists in this class')
 
-            if all_good:
-                enroll_user = Enroll(
-                    class_id=class_id, user_id=current_user_id)
+                    print('current_user_id:', current_user_id)
+                    print('class_admin:', class_admin)
+
+                    # here current_user_id was integer therefore needed to convert inti string
+                    if class_admin == str(current_user_id):
+                        print('admin cannot enroll')
+                        msg = 'admin cannot enroll...'
+                        return render(request, 'temp_app_classway/app_join_class.html', {
+                            'join_class_form': form_obj,
+                            'msg': msg
+                        })
+
+                    else:
+                        print('success')
+                        enroll_user = Enroll(
+                            class_id=get_code[0], user_id=obj_current_user_id[0])  # FK mei obj store hoga
+                        enroll_user.save()
+
+                        print('data inserted...')
+                        msg = 'class enrolled...'
+                        return render(request, 'temp_app_classway/app_join_class.html', {
+                            'join_class_form': form_obj,
+                            'msg': msg
+                        })
+
             else:
-                msg = 'something is wrong...'
-        else:
-            print("form invalid...")
+                print('code not found')
+                msg = 'invalid code...'
+                return render(request, 'temp_app_classway/app_join_class.html', {
+                    'join_class_form': form_obj,
+                    'msg': msg
+                })
     else:
         print('get')
         form_obj = ModelFormJoinClass()

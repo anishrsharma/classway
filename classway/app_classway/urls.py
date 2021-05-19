@@ -19,6 +19,11 @@ urlpatterns = [
     path('app_class_performance/', views.app_class_performance, name="app_class_performance"),
 
     path('app_no_class/', views.app_no_class, name="app_no_class"),
+    path('app_account_page/', views.app_account_page, name="app_account_page"),
+    path('app_status_page/', views.app_status_page, name="app_status_page"),
+    path('app_todo_page/', views.app_todo_page, name="app_todo_page"),
+
+
 
 
 

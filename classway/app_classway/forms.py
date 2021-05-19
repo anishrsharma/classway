@@ -102,5 +102,6 @@ class ModelFormJoinClass(forms.ModelForm):
         widgets = {
             'class_code': forms.TextInput(attrs={
                 'placeholder': 'enter class code',
+                
             }),
         }

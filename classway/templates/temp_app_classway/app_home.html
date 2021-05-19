@@ -47,7 +47,7 @@
 
             <i style="color: #eeeeee;">user: {{request.session.logged_in_user}}</i>
 
-            <a style="font-size: 13px; color: rgb(10, 4, 60);" href="/app_classway/app_join_class" class="btn-account" id="btn-join">
+            <a style="font-size: 13px; color: rgb(3, 80, 111);" href="/app_classway/app_join_class" class="btn-account" id="btn-join">
                 <i  class="material-icons">post_add</i> join class
             </a>
 
@@ -139,13 +139,13 @@
                         link = "/app_classway/app_create_class/"; break;
 
                     case 'btn-todo':
-                        link = "/app_classway/app_available_class/"; break;
+                        link = "/app_classway/app_todo_page/"; break;
 
                     case 'btn-status':
-                        link = "/app_classway/app_available_class/"; break;
+                        link = "/app_classway/app_status_page/"; break;
 
                     case 'btn-account':
-                        link = "/app_classway/app_available_class/"; break;
+                        link = "/app_classway/app_account_page/"; break;
 
                     default:
                         console.log('error...');

@@ -14,6 +14,11 @@
     background-color: #eeeeee;
     position: relative;
     z-index: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .user_class_joinclass a {
@@ -38,9 +43,8 @@
 .user_class_joinclass form h3 {
     color: rgb(3, 80, 111);
     text-transform: uppercase;
-    margin: 0 0 20px 0 ;
+    margin: 0 0 20px 0;
 }
-
 
 .user_class_joinclass form input {
     padding: 8px;
@@ -55,6 +59,36 @@
     width: 200px;
     margin: 15px auto;
     text-align: center;
+    text-transform: uppercase;
+}
+
+input {
+    text-transform: uppercase;
+}
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    text-transform: none;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    text-transform: none;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    text-transform: none;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    text-transform: none;
+}
+
+::placeholder {
+    /* Recent browsers */
+    text-transform: none;
 }
 
 .user_class_joinclass form button {

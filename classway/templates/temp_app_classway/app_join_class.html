@@ -15,9 +15,19 @@
 
 <body>
     <div class="user_class_joinclass">
-        <p>{{msg}}</p>
-        <form action="" id="frm-join-class">
+
+
+        <form action="" id="frm-join-class" style=" position: relative;">
             {% csrf_token %}
+
+            {% if msg %}
+            <p style="color:red; font-size: 13px; position: absolute; bottom: -33px;" class="msg">{{msg}}
+            </p>
+            {% endif %}
+
+
+
+
             <h3>join class</h3>
 
             {{join_class_form.class_code}}
@@ -44,7 +54,10 @@
                             "color": ""
                         });
 
-                   
+                        setTimeout(function () {
+                            $('.msg').fadeOut();
+                        }, 4000);
+
                     },
                     error: function (result) {
                         //$("#MESSAGE-DIV").html("Something went wrong!");
@@ -59,6 +72,8 @@
 
 
         });
+
+
     </script>
 
 
