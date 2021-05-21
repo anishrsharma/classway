@@ -24,6 +24,7 @@ urlpatterns = [
     path('app_todo_page/', views.app_todo_page, name="app_todo_page"),
 
 
+    path('app_class_details_enrolled/', views.app_class_details_enrolled, name="app_class_details_enrolled"),
 
 
 

@@ -23,14 +23,21 @@
 			</a>
 		</abbr>
 
-		<form>
+
+		<form action="" id="frm-add-ans">
+			<h2>{{class_name}}</h2>
+
+			<p class="msg" style="display: none;">{{msg}}</p>
+
 			<p><span><b>Question:<br> </b></span>Explain the concept of OOP.</p>
 
 			<p class="info"><i>[marks: 5]<br> [asked on: 21 jan 2021]<br> [due date: 25 jan 2021]</i></p>
-			<textarea name="" placeholder="enter your answer here..."></textarea>
+			{% csrf_token %}
+
+			{{obj_form.ans_desc}}
+
 			<label for="upload">or upload answer[pdf/vnd]:
 				<input id="upload" type="file" class="inp" accept="application/pdf,application/vnd.ms-excel">
-
 			</label>
 			<button type="submit">submit</button>
 		</form>
@@ -41,16 +48,48 @@
 
 	<script>
 		$(document).ready(function () {
-			$('.btn-back').click(function () {
+			var frm = $('#frm-add-ans');
+			frm.submit(function () {
 				$.ajax({
-					url: '/app_classway/app_class_details',
+					type: 'POST',
+					url: '/app_classway/app_add_answer/',
+					data: frm.serialize(),
 
 					success: function (result) {
-						console.log('success back btn in takeanswer...');
+						//console.log(result)
 						$('.working-area').html(result);
+
+                        modalMsg = $('.msg').text();
+
+
+
+						$('.msg-modal-main').css({
+							'right': '0'
+						});
+						$('.msg-modal-main').text(modalMsg);
+
+						setTimeout(function () {
+							$('.msg-modal-main').css({
+								'right': '-100%'
+							});
+						}, 2000)
+
+
+						setTimeout(function () {
+							$('.msg').fadeOut();
+						}, 4000);
+
+
+
+					},
+					error: function (result) {
+						console.log('error...')
 					}
 				});
+				return false;
+
 			});
+
 		})
 	</script>
 </body>

@@ -22,24 +22,71 @@
 			</a>
 		</abbr>
 
-		<form>
+		<form action="" id="frm-add-qn">
 
 			{% csrf_token %}
 
 			<h3>add new question</h3>
 
-			<textarea name="question" placeholder="enter question here..."></textarea>
+			<!-- <textarea name="question" placeholder="enter question here..."></textarea> -->
+			{{obj_form.qn_desc}}
+
 			<div class="container">
-				<input type="number" name="marks" value="" placeholder="marks">
-				<input type="date" name="duedate" value="" placeholder="due date">
+				<!-- <input type="number" name="marks" value="" placeholder="marks"> -->
+				<!-- <input type="date" name="duedate" value="" placeholder="due date"> -->
+
+				{{obj_form.qn_marks}}
+				{{obj_form.qn_deadline}}
+
 			</div>
 
 			<button type="submit">add</button>
 		</form>
 	</div>
 
+
 	<script>
 		$(document).ready(function () {
+
+
+
+			var frm = $('#frm-add-qn');
+			frm.submit(function () {
+				$.ajax({
+					type: 'POST',
+					url: '/app_classway/app_add_question/',
+					data: frm.serialize(),
+					success: function (result) {
+						$('.working-area').html(result);
+
+
+						setTimeout(function () {
+							$('.msg').fadeOut();
+						}, 4000);
+
+					},
+					error: function (result) {
+						//$("#MESSAGE-DIV").html("Something went wrong!");
+						console.log('error...')
+					}
+				});
+				return false;
+
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			$('.btn-back').click(function () {
 				$.ajax({
 					url: '/app_classway/app_class_details',

@@ -47,8 +47,9 @@
 
             <i style="color: #eeeeee;">user: {{request.session.logged_in_user}}</i>
 
-            <a style="font-size: 13px; color: rgb(3, 80, 111);" href="/app_classway/app_join_class" class="btn-account" id="btn-join">
-                <i  class="material-icons">post_add</i> join class
+            <a style="font-size: 13px; color: rgb(3, 80, 111);" href="/app_classway/app_join_class" class="btn-account"
+                id="btn-join">
+                <i class="material-icons">post_add</i> join class
             </a>
 
 
@@ -95,9 +96,22 @@
 
             <!-- ---------------- -->
 
-            <div class="working-area" id="working-area"></div>
+            <div class="working-area" id="working-area">
+
+                <div class="nothing">
+                    <img src="{% static '/img/monkey.png' %}" alt="">
+                    <p>no content!</p>
+                </div>
 
 
+            </div>
+
+
+        </div>
+
+
+        <div class="msg-modal-main">
+            <p style="color: #eeeeee; font-size: 13px;" id="msg"></p>
         </div>
     </section>
 
@@ -156,6 +170,14 @@
                     url: link,
                     success: function (result) {
                         $('.working-area').html(result);
+                        //$('.msg-modal-main').css({
+                        //    'right': '0'
+                        //});
+                        //setTimeout(function () {
+                        //    $('.msg-modal-main').css({
+                        //        'right':'-100%'
+                        //    });
+                        //}, 4000);
                     }
                 });
 
@@ -199,7 +221,7 @@
                             "color": ""
                         });
 
-                  
+
                     }
 
                 });

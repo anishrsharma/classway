@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.http import HttpResponse
 from .models import Class, Question, Answer, Enroll
 from account.models import User
 
@@ -8,6 +8,10 @@ from .forms import ModelFormEditClass, ModelFormJoinClass, ModelFormNewClass, Mo
 
 import string
 import random
+
+import json
+
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -111,16 +115,7 @@ def app_available_class(request):
 ##############################################################################
 
 
-
 ##############################################################################
-
-
-def app_class_details(request):
-    return render(request, 'temp_app_classway/app_class_details.html')
-
-
-def app_add_question(request):
-    return render(request, 'temp_app_classway/app_add_question.html')
 
 
 def app_no_class(request):
@@ -131,8 +126,7 @@ def app_class_performance(request):
     return render(request, 'temp_app_classway/app_class_performance.html')
 
 
-def app_add_answer(request):
-    return render(request, 'temp_app_classway/app_add_answer.html')
+
 
 
 def app_view_question(request):
@@ -141,6 +135,7 @@ def app_view_question(request):
 
 def app_view_question_student(request):
     return render(request, 'temp_app_classway/app_view_question_student.html')
+
 
 def app_account_page(request):
     return render(request, 'temp_app_classway/app_account_page.html')
@@ -165,6 +160,20 @@ def generate_unique_code():
     return str(code)
 
 
+def get_user_id(request):
+    if 'logged_in_user' in request.session:
+        user_email = request.session['logged_in_user']
+        obj_user = User.objects.filter(email=user_email)
+        return obj_user[0].id
+    else:
+        return '[user is not logged in]'
+
+######################################################################################
+######################################################################################
+######################################################################################
+######################################################################################
+
+
 ######################################################################################
 ######################################################################################
 ######################################################################################
@@ -176,37 +185,107 @@ def generate_unique_code():
 ######################################################################################
 ######################################################################################
 
-
-######################################################################################
-######################################################################################
-######################################################################################
-######################################################################################
+@csrf_exempt  # extempting csrf for post requests
+def app_class_details(request):
+    return render(request, 'temp_app_classway/app_class_details.html')
 
 
+def app_add_question(request):
+    if request.method == 'POST':
+        print('post')
 
-# ***
+        obj_form = ModelFormAddQuestion(request.POST)
+
+        
+
+
+        if obj_form.is_valid():
+
+            print(obj_form.cleaned_data['qn_desc'])
+
+    else:
+        obj_form = ModelFormAddQuestion()
+        print('get')
+
+    return render(request, 'temp_app_classway/app_add_question.html', {'obj_form': obj_form})
+
+
+
+
+# *** *** ***
+def app_class_details_enrolled(request):
+    # global class_id
+
+    if request.method == 'POST':
+        print('post')
+        user_id = get_user_id(request)
+
+        # got the data but in json type
+        shit_data = request.POST.get('getdata', 'None')
+
+        # converting this shit into integer:
+
+
+        bad_char = ['"']
+        for i in bad_char:
+            x = shit_data.replace(i, '')
+
+
+        class_id = int(x)
+        print("class_id:",class_id)
+
+        global obj_class
+        obj_class = Class.objects.filter(id = class_id)
+
+        global obj_qn
+        obj_qn = Question.objects.filter(class_id=class_id)
+        # print(obj_qn)
+
+        responseData = {
+            # 'id': 4,
+            # 'name': 'Test Response',
+            # 'roles' : ['Admin','User']
+            'page':'temp_app_classway/app_class_details_enrolled'
+
+        }
+
+        return HttpResponse(json.dumps(responseData), content_type="application/json")
+        # return JsonResponse('hii form views')
+        # return render(request, 'temp_app_classway/app_class_details_enrolled.html',{'obj_class':obj_class,'obj_qn':obj_qn})
+    else:
+
+        print('get')
+        return render(request, 'temp_app_classway/app_class_details_enrolled.html',{'obj_class':obj_class,'obj_qn':obj_qn})
+
+    # return render(request, 'temp_app_classway/app_class_details_enrolled.html')
+
+
+
+
+
+
+
+
+
+
+# *** done ***
 def app_available_class_enrolled(request):
 
     user_email = request.session['logged_in_user']
 
-    
+    # getting user id:
+    obj_user_id = User.objects.filter(email=user_email)
+    user_id = obj_user_id[0].id
+    print('user_id: ', user_id)
 
-
+    # getting all enrolled classes by this user:
+    obj_total_enrolled_classes = Enroll.objects.filter(user_id=user_id)
+    # print(obj_total_enrolled_classes[0].class_id.class_subject)
+    # print(obj_total_enrolled_classes[1].class_id.class_subject)
 
     return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
-        # 'created_class': obj_user_classes,
-        # 'enroll_count': obj_user_enrolls_count
+        'obj_total_enrolled_classes': obj_total_enrolled_classes
     })
-
-
-
-
-
-
-
-
-
-
 
 
 # *** done ***
@@ -222,7 +301,6 @@ def app_join_class(request):
 
             user_code = form_obj.cleaned_data['class_code']
             print('user_code:', user_code)
-
 
             # getting current user id:
             obj_current_user_id = User.objects.filter(
@@ -257,7 +335,7 @@ def app_join_class(request):
                     msg = 'already enrolled...'
                     return render(request, 'temp_app_classway/app_join_class.html', {
                         'join_class_form': form_obj,
-                        'msg':msg
+                        'msg': msg
                     })
                 else:
                     print('user does not exists in this class')
@@ -301,3 +379,124 @@ def app_join_class(request):
     return render(request, 'temp_app_classway/app_join_class.html', {
         'join_class_form': form_obj
     })
+
+
+
+
+
+
+
+
+# -------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+def app_add_answer(request):
+
+    if request.method=='POST':
+        print('post')        
+
+        obj_form = ModelFormAddAnswer(request.POST)
+        global class_name
+        global qn_desc
+
+        global class_idx
+        global qn_idx
+        global user_idx
+
+        if obj_form.is_valid():
+            print('valid')
+
+            obj_qn = Question.objects.filter(id = qn_idx)
+            print('obj_qn',obj_qn)
+
+            obj_user = User.objects.filter(id = user_idx)
+            print('obj_user',obj_user)
+
+
+
+            ans_desc = obj_form.cleaned_data['ans_desc']
+            
+
+            if Answer.objects.filter(qn_id=obj_qn[0], user_id=obj_user[0]).exists():
+                msg = 'already answered...'
+
+            else:
+                insert_ans = Answer(qn_id=obj_qn[0],user_id= obj_user[0],ans_desc=ans_desc,ans_marks=0)  # FK mei obj store hoga
+                insert_ans.save()
+                print('answer saved...')
+                msg = 'answer submitted...'
+
+                return render(request, 'temp_app_classway/app_add_answer.html',{'obj_form':obj_form,'class_name':class_name,'msg':msg})
+
+            # print('desc:',obj_form.cleaned_data['ans_desc'])
+            return render(request, 'temp_app_classway/app_add_answer.html',{'obj_form':obj_form,'class_name':class_name,'msg':msg})
+        
+        else:
+
+            print('invalid form...')
+
+
+            shit_data1 = request.POST.get('getdata1', 'None')
+            shit_data2 = request.POST.get('getdata2', 'None')
+
+            print(shit_data1)
+            print(shit_data2)
+
+            bad_char = ['"']
+
+            for i in bad_char:
+                x = shit_data1.replace(i, '')
+
+            for i in bad_char:
+                y = shit_data2.replace(i, '')
+
+            # global class_idx
+            # global qn_idx
+            # global user_idx
+
+            class_idx = int(x)
+            qn_idx = int(y)
+
+            user_idx = get_user_id(request)
+
+            print('class_id:',class_idx)
+            print('qn_id:',qn_idx)
+            print('user_id:',user_idx)
+
+
+            obj_class = Class.objects.filter(id = class_idx)
+            # global class_name
+            class_name = obj_class[0].class_name
+            print(class_name)
+
+            obj_qn = Question.objects.filter(id = qn_idx)
+            # global qn_desc
+            qn_desc = obj_qn[0].qn_desc
+            print(qn_desc)
+            
+            responseData = {
+            # 'id': 4,
+            # 'name': 'Test Response',
+            # 'roles' : ['Admin','User']
+                'page':'hii response...'
+
+            }
+
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
+            
+            # obj_form = ModelFormAddAnswer()
+            # return render(request, 'temp_app_classway/app_add_answer.html',{'obj_form':obj_form})
+
+    else:
+        print('get')
+        # return redirect('/app_classway/app_add_answer/')
+        obj_form = ModelFormAddAnswer()
+        return render(request, 'temp_app_classway/app_add_answer.html',{'obj_form':obj_form,'class_name':class_name})
+
+
+
+        

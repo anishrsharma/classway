@@ -29,7 +29,7 @@ class ModelFormAddQuestion(forms.ModelForm):
 
         widgets = {
              'qn_desc': forms.Textarea(attrs={
-                'placeholder': 'enter question here...',
+                'placeholder': 'enter question here...[ModelForm]',
                 'cols': '80',
                 'rows': '20',
             }),
@@ -37,7 +37,8 @@ class ModelFormAddQuestion(forms.ModelForm):
                 'placeholder': 'total marks'
             }),
             'qn_deadline': forms.DateTimeInput(attrs={
-                'placeholder': 'deadline'
+                'placeholder': 'deadline',
+                'type':'date'
             }),
 
         }

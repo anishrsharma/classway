@@ -1,9 +1,8 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
 
 .user_class_classdetails {
     width: 100%;
@@ -19,6 +18,19 @@
     overflow-y: scroll;
     position: relative;
 }
+
+
+.user_class_classdetails h2,h3{
+    text-transform: uppercase;
+    color: rgb(10, 4, 60);
+
+}
+
+.user_class_classdetails h3{
+    margin: 0 0 10px 0;
+}
+
+
 /* 
 .user_class_classdetails a:disabled{
     content: '';
@@ -126,4 +138,16 @@
     /* background-color: #03506f; */
     /* color: #0a043c; */
     box-shadow: 2px 2px 10px #0a043c;
+}
+
+.user_class_classdetails .row-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: rgb(255, 85, 85); */
+    border: none;
+}
+
+.user_class_classdetails .row-status i {
+    color: rgb(10, 4, 60,0.5);
 }

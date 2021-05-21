@@ -21,7 +21,7 @@
             {% csrf_token %}
 
             {% if msg %}
-            <p style="color:red; font-size: 13px; position: absolute; bottom: -33px;" class="msg">{{msg}}
+            <p style="display: none; color:red; font-size: 13px; position: absolute; bottom: -33px;" class="msg">{{msg}}
             </p>
             {% endif %}
 
@@ -41,6 +41,8 @@
 
         $(document).ready(function () {
             var frm = $('#frm-join-class');
+
+
             frm.submit(function () {
                 $.ajax({
                     type: 'POST',
@@ -53,6 +55,21 @@
                             "background-color": "",
                             "color": ""
                         });
+        
+                        modalMsg = $('.msg').text();
+
+
+                        $('.msg-modal-main').css({
+                            'right': '0'
+                        });
+                        $('.msg-modal-main').text(modalMsg);
+
+                        setTimeout(function () {
+                            $('.msg-modal-main').css({
+                                'right': '-100%'
+                            });
+                        }, 2000)
+
 
                         setTimeout(function () {
                             $('.msg').fadeOut();
@@ -62,6 +79,20 @@
                     error: function (result) {
                         //$("#MESSAGE-DIV").html("Something went wrong!");
                         console.log('error...')
+
+                        $('.msg-modal-main').css({
+                            'right': '0'
+                        });
+                        $('.msg-modal-main').text("something's wrong");
+
+                        setTimeout(function () {
+                            $('.msg-modal-main').css({
+                                'right': '-100%'
+                            });
+                        }, 2000)
+
+
+
                     }
                 });
                 return false;

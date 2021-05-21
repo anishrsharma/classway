@@ -18,91 +18,57 @@
 		<!-- <a href="">
 			<i class="fa fa-angle-left"></i>
 		</a> -->
-
 		<div class="container-class">
 
-			<h1>enrolled classes</h1>
 
-			{% comment %} {% if created_class %} {% endcomment %}
-			
-				
-				{% comment %} {% for obj in created_class %} {% endcomment %}
+			{% if obj_total_enrolled_classes %}
+
+			{% for obj in obj_total_enrolled_classes %}
 
 
-				<div class="class-box">
-					<div class="class-box-name">
-						<h2>
-							{{obj.class_name}}
-						</h2>
-					</div>
+			<div class="class-box" onclick="getInfo('{{obj.class_id.id}}');">
+				<div class="class-box-name">
+					<h2>
+						{{obj.class_id.class_name}}
 
-					<div class="class-box-info">
-						<ul>
-							<li>subject: {{obj.class_subject}}</li>
-							<li>students: {{enroll_count}}</li>
-							{% comment %} <li>code: {{obj.class_code}}</li> {% endcomment %}
-
-						</ul>
-					</div>
-
-					<div class="options">
-
-						<a href="javascript:void(0)" class="edit">
-							<abbr title="edit">
-								<i class="material-icons">mode_edit</i>
-							</abbr>
-
-						</a>
-						<a href="javascript:void(0)" class="delete">
-							<abbr title="delete">
-								<i class="material-icons">delete</i>
-							</abbr>
-						</a>
-
-
-					</div>
+					</h2>
 				</div>
 
-				{% comment %} {% endfor %} {% endcomment %}
+				<div class="class-box-info">
+					<ul>
+						<li>subject: {{obj.class_id.class_subject}}</li>
+						<li>students: N/A</li>
+
+					</ul>
+				</div>
+
+				<div class="options">
+
+					<a href="javascript:void(0)" class="edit">
+						<abbr title="edit">
+							<i class="material-icons">mode_edit</i>
+						</abbr>
+
+					</a>
+					<a href="javascript:void(0)" class="exit">
+						<abbr title="exit">
+							<i class="material-icons">logout</i>
+						</abbr>
+					</a>
 
 
-			{% comment %} {% else %} {% endcomment %}
-
-				{% comment %} <p>error[no class found]</p> {% endcomment %}
-
-			{% comment %} {% endif %} {% endcomment %}
-
-			<!-- </a> -->
-			<!-- <a href=""> -->
-
-
-
-
-
-
-
-
-			<div class="modal-box-delete" id="modal-box-delete">
-				<p>do you really want to delete this class A</p>
-
-				<div class="modal-option">
-					<button class="btn-modal-yes" type="">yes</button>
-					<button class="btn-modal-no" type="">no</button>
 				</div>
 			</div>
 
-			<div class="modal-box-edit">
-				<h4>edit class A</h4>
-				<form action="#">
-					<input type="text" name="" id="" placeholder="new class name">
-					<input type="text" name="" id="" placeholder="new subject name">
-					<label for="">
-						<input type="checkbox" name="" id="" placeholder="new class name">
-						private
-					</label>
-					<button class="btn-modal-edit">edit</button>
-				</form>
-			</div>
+
+
+
+			{% endfor %}
+
+			{% endif %}
+
+
+
 
 		</div>
 	</div>
@@ -112,19 +78,65 @@
 
 	<script>
 
+
+		// only to send data
+		function getInfo(myData) {
+			$.ajax({
+				url: "/app_classway/app_class_details_enrolled/",
+				data: {
+					'getdata': JSON.stringify(myData),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+				},
+				dataType: 'json',
+				type: 'POST',
+
+				success: function (result) {
+					console.log('success');
+					console.log('result:'+result.page);
+
+					$.ajax({
+						url: "/app_classway/app_class_details_enrolled/",
+						
+						success: function (result, status) {
+							$('.working-area').html(result);
+						},
+						error: function (result) {
+							console.log('error:'+result.status)
+						}
+	
+					});
+
+				}
+
+			});
+
+		}
+
 		$(document).ready(function () {
 
 
-			$('.class-box-name, .class-box-info').click(function () {
+			/*$('.class-box').click(function () {
 				$.ajax({
-					url: '/app_classway/app_class_details',
+					url: "/app_classway/app_class_details_enrolled/",
 
-					success: function (result) {
-						console.log('success');
+					success: function (result, status) {
 						$('.working-area').html(result);
+					},
+					error: function (result) {
+						console.log('error:'+result.status)
 					}
+
 				});
+
+			});*/
+
+			$('.exit').on('click', function (event) {
+				event.stopPropagation();
+
+				alert('hiiii')
 			});
+
 
 			$('.delete').click(function () {
 				$('.modal-box-delete').css({
