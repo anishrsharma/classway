@@ -29,7 +29,7 @@
 			{% for obj in created_class %}
 
 
-			<div class="class-box" onclick="getData('{{obj.id}}');">
+			<div class="class-box" onclick="getInfo('{{obj.id}}');">
 				<div class="class-box-name">
 					<h2>
 						{{obj.class_name}}
@@ -114,37 +114,63 @@
 	<script>
 
 
-		function getData(data) {
+		function getInfo(myData) {
 			$.ajax({
 				url: "/app_classway/app_class_details/",
 				data: {
-					'getdata': JSON.stringify(data)
+					'getdata': JSON.stringify(myData),
+					csrfmiddlewaretoken: '{{ csrf_token }}'
+
 				},
 				dataType: 'json',
 				type: 'POST',
 
-				success: function (res, status) {
-					console.log('data sent...\nstatus:' + status)
+				success: function (result) {
+					console.log('success');
+					console.log('result:' + result.page);
+
+					$.ajax({
+						url: "/app_classway/app_class_details/",
+
+						success: function (result, status) {
+							$('.working-area').html(result);
+						},
+						error: function (result) {
+							console.log('error:' + result.status)
+						}
+
+					});
+
 				}
 
 			});
 
 		}
 
-
 		$(document).ready(function () {
 
 
-			$('.class-box-name, .class-box-info').click(function () {
+			/*$('.class-box').click(function () {
 				$.ajax({
-					url: '/app_classway/app_class_details',
+					url: "/app_classway/app_class_details_enrolled/",
 
-					success: function (result) {
-						console.log('success');
+					success: function (result, status) {
 						$('.working-area').html(result);
+					},
+					error: function (result) {
+						console.log('error:'+result.status)
 					}
+
 				});
+
+			});*/
+
+			$('.delete').on('click', function (event) {
+				event.stopPropagation();
+
+				alert('hiiii')
 			});
+
 
 			$('.delete').click(function () {
 				$('.modal-box-delete').css({
@@ -209,6 +235,7 @@
 			console.log('dropdown fn executed');
 
 		}
+
 
 
 	</script>

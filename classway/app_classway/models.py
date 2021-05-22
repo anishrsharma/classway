@@ -10,7 +10,7 @@ class Class(models.Model):
     class_subject = models.CharField(max_length=30)
     class_code = models.CharField(max_length=7)
     # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    class_admin = models.CharField(max_length=4)
+    class_admin = models.CharField(max_length=4) # it should be a FK
 
 
 class Question(models.Model):

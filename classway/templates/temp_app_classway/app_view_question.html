@@ -26,15 +26,16 @@
 
 
 		<div class="container1">
+
+			<h2>{{class_name}} [{{class_subject}}]</h2>
+
 			<h3>question:</h3>
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed veniam voluptatem, aspernatur blanditiis
-				deleniti praesentium rerum ipsum magnam minus dolores non asperiores repudiandae corrupti mollitia
-				possimus quo soluta tempore labore.</p>
+			<p>{{qn_desc}}</p>
 			<hr>
 			<div class="more">
-				<p>marks: 10</p>
-				<p>asked on: 21 feb 2021</p>
-				<p>deadline: 23 feb 2021</p>
+				<p>marks: {{qn_marks}}</p>
+				<p>asked on: {{qn_date}}</p>
+				<p>deadline: {{qn_deadline}}</p>
 				<p>status: 23/40</p>
 			</div>
 		</div>
@@ -46,161 +47,16 @@
 					<th>date</th>
 				</tr>
 
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
+				{% for obj_stud_list in obj_stud_list %}
 
 				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
+					<td>{{obj_stud_list.user_id.first_name}}</td>
+					<td>{{obj_stud_list.ans_date}}</td>
 				</tr>
 
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
+				{% endfor %}
 
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
 
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
-
-				<tr class="row-link">
-					<td>Lakshya Nathani</td>
-					<td>22 feb 2021 [8:37 am]</td>
-				</tr>
 			</table>
 		</div>
 	</div>

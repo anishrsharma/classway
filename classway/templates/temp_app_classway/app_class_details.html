@@ -23,6 +23,11 @@
 			</a>
 		</abbr>
 
+		{% for obj_class in obj_class %}
+		<h3>{{obj_class.class_name}} [{{obj_class.class_subject}}]</h3>
+
+
+
 
 		<div class="tables">
 			<table>
@@ -30,153 +35,76 @@
 					<th>sn</th>
 					<th style="width: 500px;">question</th>
 					<th>date</th>
-					<th>due date</th>
+					<th>deadline</th>
 					<th>status</th>
 				</tr>
 
-				<tr class="row-link">
-					<td>1.</td>
-					<td>what is OOP?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
+				{% for obj_qn in obj_qn %}
+
+				<tr class="row-link" onclick="return getInfo('{{obj_class.id}}','{{obj_qn.id}}')">
+					<td>{{obj_qn.id}}</td>
+					<td>{{obj_qn.qn_desc}}</td>
+					<td>{{obj_qn.qn_date}}</td>
+					<td>{{obj_qn.qn_deadline}}</td>
+					<td> 2/10 </td>
+
 				</tr>
-				<tr class="row-link">
-					<td>2.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>3.</td>
-					<td>Describe OOP. What is inheritence?Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-						do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-						nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-						sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-						laborum.</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
-				<tr class="row-link">
-					<td>4.</td>
-					<td>Describe OOP. What is inheritence?</td>
-					<td>25-jan-2021</td>
-					<td>27-jan-2021</td>
-					<td>23/40</td>
-				</tr>
+
+				{% endfor %}
+
 			</table>
 		</div>
+
+		{% endfor %}
 
 		<div class="more">
 			<button type="" class="btn-addqn">add question</button>
 			<button type="" class="btn-performance">performance</button>
 
 		</div>
+
+
 	</div>
 
 
 	<script>
+
+
+		function getInfo(data1, data2) {
+
+			$.ajax({
+				url: "/app_classway/app_view_question/",
+				data: {
+					'getdata1': JSON.stringify(data1),
+					'getdata2': JSON.stringify(data2),
+					csrfmiddlewaretoken: '{{ csrf_token }}'
+
+				},
+				dataType: 'json',
+				type: 'POST',
+
+
+				success: function (result) {
+					//alert('success:' + result.page)
+
+					$.ajax({
+						url: "/app_classway/app_view_question/",
+						type: 'GET',
+						success: function (result) {
+							console.log('result:'+result.page);
+							$('.working-area').html(result)
+						}
+
+					});
+
+
+				}
+
+			});
+
+		}
+
+
 		$(document).ready(function () {
 
 			// back btn
@@ -204,10 +132,10 @@
 
 			});
 
-			$('.row-link').click(function () {
+			/*$('.row-link').click(function () {
 				$('.user_class_classdetails').load('/app_classway/app_view_question');
 
-			});
+			});*/
 
 
 		});
