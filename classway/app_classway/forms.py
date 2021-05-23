@@ -68,7 +68,7 @@ class ModelFormAllotMarks(forms.ModelForm):
         fields = ['ans_marks', ]
 
         widgets = {
-            'ans_desc': forms.NumberInput(attrs={  # ***
+            'ans_marks': forms.NumberInput(attrs={ 
                 'placeholder': 'marks',
                 'min': '0'
             }),

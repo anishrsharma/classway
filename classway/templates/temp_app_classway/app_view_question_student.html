@@ -25,65 +25,126 @@
         </abbr>
 
         <div class="qn-desc">
-            <p style="text-transform: uppercase;">ID: 21</p>
-            <p style="text-transform: uppercase;">name: Ayushman Sharma</p>
+
+            {% for obj_stud in obj_stud %}
+            <p style="text-transform: uppercase;">email: {{obj_stud.email}}</p>
+            <p style="text-transform: uppercase;">name: {{obj_stud.first_name}} {{obj_stud.last_name}}</p>
+            {% endfor %}
+
             <hr>
 
             <p style="font-weight: bold;">Question:</p>
 
-            <p>Ducimus cum optio officia veritatis eaque architecto quisquam, voluptatibus dolores aliquid aspernatur
-                eveniet?</p>
-            <p style="font-size: 12px;  color: blue; margin-top: 10px;">[ total marks: 10 ]</p>
-            <p style="font-size: 12px;  color: blue;">[ assign date: 21 jan 2021 ]</p>
-            <p style="font-size: 12px;  color: blue;">[ deadline: 22 jan 2021 ]</p>
+            {% for obj_qn in obj_qnq %}
+            <p>{{obj_qn.qn_desc}}</p>
+
+
+            <p style="font-size: 12px;  color: blue; margin-top: 10px;">[ total marks: {{obj_qn.qn_marks}} ]</p>
+            <p style="font-size: 12px;  color: blue;">[ assign date: {{obj_qn.qn_date}} ]</p>
+            <p style="font-size: 12px;  color: blue;">[ deadline: {{obj_qn.qn_deadline}} ]</p>
             <p style="font-size: 12px;  color: blue;">[ on time ]</p>
+
+            {% endfor %}
 
             <hr>
             <p style="font-weight: bold; margin-top: 20px;">Answer:</p>
 
-            <p class="p-ans">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni voluptatum commodi veniam adipisci quibusdam praesentium necessitatibus laudantium est! Nobis dolorum quo atque quasi aperiam placeat excepturi nihil ullam illo autem? Lorem ipsum dolor, sit amet consectetur adipisicing elit. A aspernatur quia obcaecati facilis provident voluptatibus consequuntur nemo totam. Recusandae fugit illo accusantium optio harum error fuga, laudantium tempore repellat eveniet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil saepe quod, illum adipisci,
-                incidunt voluptatibus ad temporibus, quae earum ducimus atque. Veniam aliquam alias nostrum corrupti
-                laborum dicta velit. Eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis atque fugit
-                eius dolorum provident nulla, quisquam repellendus perferendis quis consequuntur voluptate sequi culpa
-                modi quas totam nobis! Unde, dolor quidem. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Corrupti voluptates magnam tempora quibusdam obcaecati explicabo molestiae temporibus reprehenderit
-                repellat cum quam repudiandae, sapiente tenetur, assumenda similique adipisci, in perferendis fuga.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae minus quis nisi sed. Delectus eligendi hic
-                neque nam dignissimos earum blanditiis, laborum corporis exercitationem aliquam, fugit, dicta
-                consequuntur esse sed!</p>
-            <!-- <embed src="{% static 'files/SWTM-2088_Atlassian-Git-Cheatsheet.pdf' %}" width="80px" height="20px" /> -->
-            <a class="pdf" href="{% static 'files/SWTM-2088_Atlassian-Git-Cheatsheet.pdf' %}" target="_blank">attached file <i class="material-icons">description</i></a>
+
+
+
+            {% for obj_ans in obj_ans %}
+
+            <p class="p-ans">{{obj_ans.ans_desc}}</p>
+
+            <!-- <a class="pdf" href="{% static 'files/SWTM-2088_Atlassian-Git-Cheatsheet.pdf' %}" target="_blank">attached
+                file <i class="material-icons">description</i></a> -->
+
+            {% endfor %}
+
 
 
             <hr>
 
         </div>
 
-        <form action="">
+        <form action="" id="frm-assign-marks">
+            {% csrf_token %}
             <!-- <label for="">allot marks</label> -->
-            <input type="number" name="" id="" placeholder="allot marks">
+            <!-- <input type="number" name="" id="" placeholder="allot marks"> -->
+            {{obj_form.ans_marks}}
 
             <button type="submit">assign</button>
             <!-- <input class="btn" type="submit" name="" id="" value="assign"> -->
         </form>
 
+        <p class="msg" style="display: none;">{{msg}}</p>
+        
+
     </div>
 
-	<script>
-		$(document).ready(function () {
-			$('.btn-back').click(function () {
-				$.ajax({
-					url: '/app_classway/app_view_question',
-					
+    <script>
+        $(document).ready(function () {
 
-					success: function (result) {
-						console.log('success back btn in classperformance...');
-						$('.working-area').html(result);
-					}
-				});
-			});
-		})
-	</script>
+
+            var frm = $('#frm-assign-marks');
+
+            frm.submit(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/app_classway/app_view_question_student/',
+                    data: frm.serialize(),
+                    success: function (result) {
+
+                        
+                        modalMsg = result.msg;
+                        console.log(modalMsg)
+
+
+                        $('.msg-modal-main').css({
+                            'right': '0'
+                        });
+                        $('.msg-modal-main').text(modalMsg);
+
+                        setTimeout(function () {
+                            $('.msg-modal-main').css({
+                                'right': '-100%'
+                            });
+                        }, 2000)
+
+
+                        setTimeout(function () {
+                            $('.msg').fadeOut();
+                        }, 4000);
+
+                    },
+                    error: function (result) {
+                        console.log('error...')
+                    }
+                });
+                return false;
+
+
+
+            });
+
+
+
+
+
+
+            $('.btn-back').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_view_question',
+
+
+                    success: function (result) {
+                        console.log('success back btn in classperformance...');
+                        $('.working-area').html(result);
+                    }
+                });
+            });
+        })
+    </script>
 </body>
 
 </html>

@@ -27,17 +27,24 @@
 
 		<div class="container1">
 
-			<h2>{{class_name}} [{{class_subject}}]</h2>
+			{% for obj_class in obj_class %}
+			<h2>{{obj_class.class_name}} [{{obj_class.class_subject}}]</h2>
+			{% endfor %}
 
+
+			{% for obj_qnk in obj_qnk %}
 			<h3>question:</h3>
-			<p>{{qn_desc}}</p>
+			<p>{{obj_qnk.qn_desc}}</p>
 			<hr>
 			<div class="more">
-				<p>marks: {{qn_marks}}</p>
-				<p>asked on: {{qn_date}}</p>
-				<p>deadline: {{qn_deadline}}</p>
+				<p>marks: {{obj_qnk.qn_marks}}</p>
+				<p>asked on: {{obj_qnk.qn_date}}</p>
+				<p>deadline: {{obj_qnk.qn_deadline}}</p>
 				<p>status: 23/40</p>
 			</div>
+			{% endfor %}
+
+
 		</div>
 
 		<div class="container2">
@@ -49,7 +56,7 @@
 
 				{% for obj_stud_list in obj_stud_list %}
 
-				<tr class="row-link">
+				<tr class="row-link" onclick="return getInfo('{{obj_stud_list.user_id.id}}','{{qn_idk}}')">
 					<td>{{obj_stud_list.user_id.first_name}}</td>
 					<td>{{obj_stud_list.ans_date}}</td>
 				</tr>
@@ -63,6 +70,36 @@
 
 
 	<script>
+
+
+		function getInfo(data1, data2) {
+
+			alert('stud_id:' + data1 + '\nqn_id:' + data2);
+
+			$.ajax({
+				url: "/app_classway/app_view_question_student/",
+				data: {
+					'getdata1': JSON.stringify(data1),
+					'getdata2': JSON.stringify(data2),
+					csrfmiddlewaretoken: '{{ csrf_token }}'
+				},
+				dataType: 'json',
+				type: 'POST',
+				success: function (result) {
+					$.ajax({
+						url: "/app_classway/app_view_question_student/",
+						type: 'GET',
+						success: function (result) {
+							console.log('result:' + result.page);
+							$('.working-area').html(result)
+						}
+					});
+				}
+			});
+		}
+
+
+
 		$(document).ready(function () {
 			$('.btn-back').click(function () {
 				$.ajax({
@@ -73,14 +110,14 @@
 				});
 			});
 
-			$('.row-link').click(function () {
+			/*$('.row-link').click(function () {
 				$.ajax({
 					url: '/app_classway/app_view_question_student',
 					success: function (result) {
 						$('.working-area').html(result);
 					}
 				});
-			});
+			});*/
 		});
 	</script>
 </body>
