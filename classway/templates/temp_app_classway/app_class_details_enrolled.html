@@ -74,8 +74,12 @@
 
 
         function getInfo(data1, data2) {
+            console.log('class_id:' + data1);
+            console.log('qn_id:' + data2);
 
             $.ajax({
+
+
                 url: "/app_classway/app_add_answer/",
                 data: {
                     'getdata1': JSON.stringify(data1),

@@ -42,6 +42,9 @@
 
 			<button type="submit">add</button>
 		</form>
+
+		<!-- <p class="msg"></p> -->
+
 	</div>
 
 
@@ -57,11 +60,20 @@
 					url: '/app_classway/app_add_question/',
 					data: frm.serialize(),
 					success: function (result) {
-						$('.working-area').html(result);
+						//$('.working-area').html();
+
+						modalMsg = result.response;
+
+						$('.msg-modal-main').css({
+							'right': '0'
+						});
+						$('.msg-modal-main').text(modalMsg);
 
 						setTimeout(function () {
-							$('.msg').fadeOut();
-						}, 4000);
+							$('.msg-modal-main').css({
+								'right': '-100%'
+							});
+						}, 2000)
 
 					},
 					error: function (result) {
@@ -72,14 +84,6 @@
 				return false;
 
 			});
-
-
-
-
-
-
-
-
 
 
 

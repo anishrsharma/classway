@@ -29,7 +29,7 @@
 
 			<p class="msg" style="display: none;">{{msg}}</p>
 
-			<p><span><b>Question:<br> </b></span>Explain the concept of OOP.</p>
+			<p><span><b>Question:<br> </b></span>{{qn_desc}}</p>
 
 			<p class="info"><i>[marks: 5]<br> [asked on: 21 jan 2021]<br> [due date: 25 jan 2021]</i></p>
 			{% csrf_token %}
@@ -73,9 +73,7 @@
 						}, 2000)
 
 
-						setTimeout(function () {
-							$('.msg').fadeOut();
-						}, 4000);
+					
 
 
 

@@ -41,7 +41,9 @@
 						<li>subject: {{obj.class_subject}}</li>
 						<li>students: {{enroll_count}}</li>
 
-						<li>code: {{obj.class_code}}</li>
+						<li style="display: flex; align-items: center;">code: {{obj.class_code}} <i
+								style="font-size: 18px; margin-left: 5px;" class="material-icons copy-text"
+								onclick="clipboard();">content_paste</i></li>
 
 					</ul>
 				</div>
@@ -165,7 +167,7 @@
 
 			});*/
 
-			$('.delete').on('click', function (event) {
+			$('.delete, .copy-text').on('click', function (event) {
 				event.stopPropagation();
 
 				alert('hiiii')

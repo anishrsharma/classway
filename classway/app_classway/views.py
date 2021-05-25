@@ -8,8 +8,8 @@ from .forms import ModelFormEditClass, ModelFormJoinClass, ModelFormNewClass, Mo
 
 import string
 import random
-
 import json
+
 
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -80,7 +80,6 @@ def app_class_performance(request):
     return render(request, 'temp_app_classway/app_class_performance.html')
 
 
-
 def app_view_question(request):
     if request.method == 'POST':
         shit_data1 = request.POST.get('getdata1', 'None')
@@ -100,43 +99,27 @@ def app_view_question(request):
         print(class_idy)
         print(qn_idy)
 
-        # global class_name
-        # global class_subject
-        # global qn_desc
-        # global qn_marks
-        # global qn_date
-        # global qn_deadline
-
         global obj_class
         global obj_qnk
         global obj_stud_list
         global qn_idk
 
-
-        obj_class = Class.objects.filter(id = class_idy)
-        # class_name = obj_class[0].class_name
-        # print(class_name)
-        # class_subject = obj_class[0].class_subject
-        # print(class_subject)
-
-
+        obj_class = Class.objects.filter(id=class_idy)
 
         # get all qns from this class
-        obj_qnk = Question.objects.filter(id = qn_idy,class_id=class_idy)
+        obj_qnk = Question.objects.filter(id=qn_idy, class_id=class_idy)
 
         print(obj_qnk)
 
         qn_idk = obj_qnk[0].id
-     
-        print('qn_idk:',qn_idk)
 
+        print('qn_idk:', qn_idk)
 
         obj_stud_list = Answer.objects.filter(qn_id=obj_qn[0])
-        print('obj_stud_list:',obj_stud_list)
+        print('obj_stud_list:', obj_stud_list)
 
         for i in obj_stud_list:
             print(i.user_id.first_name)
-
 
         responseData = {
             'page': 'hii response...'
@@ -144,21 +127,15 @@ def app_view_question(request):
 
         return HttpResponse(json.dumps(responseData), content_type="application/json")
 
-
     else:
-        return render(request, 'temp_app_classway/app_view_question.html',{
+        return render(request, 'temp_app_classway/app_view_question.html', {
             # 'obj_qn':obj_qn,
-            'obj_class':obj_class,
-            'obj_qnk':obj_qnk,
-            'obj_stud_list':obj_stud_list,
-            'qn_idk':qn_idk
+            'obj_class': obj_class,
+            'obj_qnk': obj_qnk,
+            'obj_stud_list': obj_stud_list,
+            'qn_idk': qn_idk
 
         })
-
-
-
-
-
 
 
 def app_view_question_student(request):
@@ -169,20 +146,20 @@ def app_view_question_student(request):
         global obj_ans
         global obj_stud
         # global msg
-        
+
         if obj_form.is_valid():
             print('valid form')
             msg = 'form valid'
-            print('msg:',msg)
-            
+            print('msg:', msg)
+
             marks = obj_form.cleaned_data['ans_marks']
-            print('marks:',marks)
+            print('marks:', marks)
 
-            print('obj_ans:',obj_ans)
+            print('obj_ans:', obj_ans)
             ans_id = obj_ans[0].id
-            print('ans_id:',ans_id)
+            print('ans_id:', ans_id)
 
-            allot_marks = Answer.objects.get(id = ans_id)
+            allot_marks = Answer.objects.get(id=ans_id)
             if allot_marks.ans_marks is None:
                 allot_marks.ans_marks = marks
                 allot_marks.save()
@@ -216,16 +193,14 @@ def app_view_question_student(request):
             stud_idp = int(x)
             qn_idp = int(y)
 
-            print('stud_idp',stud_idp)
-            print('qn_idp',qn_idp)
+            print('stud_idp', stud_idp)
+            print('qn_idp', qn_idp)
 
-    
+            obj_stud = User.objects.filter(id=stud_idp)
 
-            obj_stud = User.objects.filter(id = stud_idp)
+            obj_qnq = Question.objects.filter(id=qn_idp)
 
-            obj_qnq = Question.objects.filter(id = qn_idp)
-
-            obj_ans = Answer.objects.filter(user_id=stud_idp,qn_id=qn_idp)
+            obj_ans = Answer.objects.filter(user_id=stud_idp, qn_id=qn_idp)
 
         responseData = {
             'page': 'hii response... from qn_student'
@@ -233,16 +208,14 @@ def app_view_question_student(request):
 
         return HttpResponse(json.dumps(responseData), content_type="application/json")
 
-
     else:
         obj_form = ModelFormAllotMarks()
-        return render(request, 'temp_app_classway/app_view_question_student.html',{
-            'obj_form':obj_form,
-            'obj_stud':obj_stud,
-            'obj_qnq':obj_qnq,
-            'obj_ans':obj_ans,
+        return render(request, 'temp_app_classway/app_view_question_student.html', {
+            'obj_form': obj_form,
+            'obj_stud': obj_stud,
+            'obj_qnq': obj_qnq,
+            'obj_ans': obj_ans,
         })
-
 
 
 def app_account_page(request):
@@ -339,11 +312,51 @@ def app_add_question(request):
     if request.method == 'POST':
         print('post')
 
+        global class_id_add_qn
+
         obj_form = ModelFormAddQuestion(request.POST)
 
         if obj_form.is_valid():
+            print('form valid...')
+            print('qn_desc:', obj_form.cleaned_data['qn_desc'])
+            print('class_id_add_qn:', class_id_add_qn)
+            print('qn deadline:', obj_form.cleaned_data['qn_deadline'])
 
-            print(obj_form.cleaned_data['qn_desc'])
+            obj_class_add_qn = Class.objects.filter(id=class_id_add_qn)
+            print('obj_class_add_qn', obj_class_add_qn)
+
+            qn_desc = obj_form.cleaned_data['qn_desc']
+            qn_marks = obj_form.cleaned_data['qn_marks']
+            qn_deadline = obj_form.cleaned_data['qn_deadline']
+
+            add_qn = Question(qn_marks=qn_marks, qn_desc=qn_desc,
+                              qn_deadline=qn_deadline, class_id=obj_class_add_qn[0])
+            add_qn.save()
+            print('inserted')
+
+            responseData = {
+                'response': 'new question added...'
+            }
+
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+        else:
+            print('form not valid')
+
+            shit_data = request.POST.get('getdata', 'None')
+
+            bad_char = ['"']
+            for i in bad_char:
+                x = shit_data.replace(i, '')
+
+            class_id_add_qn = int(x)
+            print('class_id_qn: ', class_id_add_qn)
+
+            responseData = {
+                'response': 'from add qn...'
+            }
+
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
 
     else:
         obj_form = ModelFormAddQuestion()
@@ -623,10 +636,20 @@ def app_add_answer(request):
                 print('answer saved...')
                 msg = 'answer submitted...'
 
-                return render(request, 'temp_app_classway/app_add_answer.html', {'obj_form': obj_form, 'class_name': class_name, 'msg': msg})
+                return render(request, 'temp_app_classway/app_add_answer.html', {
+                    'obj_form': obj_form, 
+                    'class_name': class_name, 
+                    'msg': msg,
+                    'qn_desc':qn_desc
+                })
 
             # print('desc:',obj_form.cleaned_data['ans_desc'])
-            return render(request, 'temp_app_classway/app_add_answer.html', {'obj_form': obj_form, 'class_name': class_name, 'msg': msg})
+            return render(request, 'temp_app_classway/app_add_answer.html', {
+                'obj_form': obj_form,
+                'class_name': class_name,
+                'msg': msg,
+                'qn_desc':qn_desc
+            })
 
         else:
 
@@ -662,7 +685,7 @@ def app_add_answer(request):
             obj_class = Class.objects.filter(id=class_idx)
             # global class_name
             class_name = obj_class[0].class_name
-            print(class_name)
+            print('class_name:',class_name)
 
             obj_qn = Question.objects.filter(id=qn_idx)
             # global qn_desc
@@ -686,4 +709,8 @@ def app_add_answer(request):
         print('get')
         # return redirect('/app_classway/app_add_answer/')
         obj_form = ModelFormAddAnswer()
-        return render(request, 'temp_app_classway/app_add_answer.html', {'obj_form': obj_form, 'class_name': class_name})
+        return render(request, 'temp_app_classway/app_add_answer.html', {
+            'obj_form': obj_form,
+            'class_name': class_name,
+            'qn_desc':qn_desc
+        })

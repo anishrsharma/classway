@@ -58,8 +58,13 @@
 		{% endfor %}
 
 		<div class="more">
-			<button type="" class="btn-addqn">add question</button>
+
+			{% for obj_class in obj_class %}
+			<button type="" class="btn-addqn" onclick="return getInfo2('{{obj_class.id}}')">add question</button>
 			<button type="" class="btn-performance">performance</button>
+			{% endfor %}
+			<!-- <button type="" class="btn-addqn"onclick="return getInfo('{{obj_class.id}}')">add question</button>
+			<button type="" class="btn-performance">performance</button> -->
 
 		</div>
 
@@ -91,7 +96,7 @@
 						url: "/app_classway/app_view_question/",
 						type: 'GET',
 						success: function (result) {
-							console.log('result:'+result.page);
+							console.log('result:' + result.page);
 							$('.working-area').html(result)
 						}
 
@@ -102,6 +107,36 @@
 
 			});
 
+		}
+
+		function getInfo2(data) {
+
+			console.log('class_id:', data);
+
+			$.ajax({
+				url: "/app_classway/app_add_question/",
+				data: {
+					'getdata': JSON.stringify(data),
+					//'getdata2': JSON.stringify(data2),
+					csrfmiddlewaretoken: '{{ csrf_token }}'
+
+				},
+				dataType: 'json',
+				type: 'POST',
+
+
+				success: function (result) {
+
+					$.ajax({
+						url: "/app_classway/app_add_question/",
+						type: 'GET',
+						success: function (result) {
+							console.log('result:' + result.page);
+							$('.working-area').html(result)
+						}
+					});
+				}
+			});
 		}
 
 
@@ -122,10 +157,7 @@
 
 
 
-			$('.btn-addqn').click(function () {
-				$('.user_class_classdetails').load('/app_classway/app_add_question');
 
-			});
 
 			$('.btn-performance').click(function () {
 				$('.user_class_classdetails').load('/app_classway/app_class_performance');
