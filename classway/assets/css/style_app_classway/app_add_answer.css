@@ -14,6 +14,7 @@
     align-items: center;
     justify-content: center;
     background-color: #eeeeee;
+    position: relative;
 }
 
 .user_class_takeanswer .fa {
@@ -23,6 +24,7 @@
     font-weight: bolder;
     padding: 10px;
     color: #e05297;
+    font-size: 30px;
 }
 
 .user_class_takeanswer form {

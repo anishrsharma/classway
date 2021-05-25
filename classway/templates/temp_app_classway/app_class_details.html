@@ -76,6 +76,7 @@
 
 
 		function getInfo(data1, data2) {
+			console.log('class_id:'+data1+'\nqn_id:'+data2);
 
 			$.ajax({
 				url: "/app_classway/app_view_question/",
@@ -111,7 +112,7 @@
 
 		function getInfo2(data) {
 
-			console.log('class_id:', data);
+			console.log('class_id:'+data);
 
 			$.ajax({
 				url: "/app_classway/app_add_question/",

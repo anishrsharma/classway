@@ -11,6 +11,14 @@
     src: url(/static/font/space-age.woff);
 }
 
+
+abbr {
+    border-bottom: none !important;
+    cursor: inherit !important;
+    text-decoration: none !important;
+  }
+
+
 .first-nav {
     display: flex;
     justify-content: space-around;

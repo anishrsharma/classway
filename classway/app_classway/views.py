@@ -115,7 +115,7 @@ def app_view_question(request):
 
         print('qn_idk:', qn_idk)
 
-        obj_stud_list = Answer.objects.filter(qn_id=obj_qn[0])
+        obj_stud_list = Answer.objects.filter(qn_id=qn_idk)
         print('obj_stud_list:', obj_stud_list)
 
         for i in obj_stud_list:

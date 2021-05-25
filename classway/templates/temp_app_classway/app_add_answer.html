@@ -86,6 +86,20 @@
 
 			});
 
+
+
+
+
+
+			$('.btn-back').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_class_details_enrolled/',
+                    success: function (result) {
+                        $('.working-area').html(result);
+                    }
+                });
+            });
+
 		})
 	</script>
 </body>
