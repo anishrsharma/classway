@@ -47,7 +47,7 @@
 
             <i style="color: #eeeeee;">user: {{request.session.logged_in_user}}</i>
 
-            <a style="font-size: 13px; color: rgb(3, 80, 111);" href="/app_classway/app_join_class" class="btn-account"
+            <a style="font-size: 15px; color: rgb(3, 80, 111);" href="/app_classway/app_join_class" class="btn-account"
                 id="btn-join">
                 <i class="material-icons">post_add</i> join class
             </a>
@@ -131,6 +131,7 @@
             $(document).on("click", "#btnm", function () {
                 var clickedAttr = $(this).attr('class'); // or var clickedBtnID = this.class
 
+
                 $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                     "background-color": "",
                     "color": ""
@@ -140,6 +141,8 @@
                     "background-color": "#eeeeee",
                     "color": "#393e46"
                 });
+
+                
 
 
                 switch (clickedAttr) {
@@ -163,6 +166,7 @@
 
                     default:
                         console.log('error...');
+                        alert('coming soon...')
                 }
 
 
@@ -170,14 +174,6 @@
                     url: link,
                     success: function (result) {
                         $('.working-area').html(result);
-                        //$('.msg-modal-main').css({
-                        //    'right': '0'
-                        //});
-                        //setTimeout(function () {
-                        //    $('.msg-modal-main').css({
-                        //        'right':'-100%'
-                        //    });
-                        //}, 4000);
                     }
                 });
 
