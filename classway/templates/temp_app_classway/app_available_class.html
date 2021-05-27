@@ -19,6 +19,10 @@
 			<i class="fa fa-angle-left"></i>
 		</a> -->
 
+		
+		<h3>my classes</h3>
+		<hr>
+
 		<div class="container-class">
 
 
@@ -43,20 +47,20 @@
 
 						<li style="display: flex; align-items: center;">code: {{obj.class_code}} <i
 								style="font-size: 18px; margin-left: 5px;" class="material-icons copy-text"
-								onclick="clipboard();">content_paste</i></li>
+								onclick="clipboard();">content_copy</i></li>
 
 					</ul>
 				</div>
 
 				<div class="options">
 
-					<a href="javascript:void(0)" class="edit">
+					<a href="javascript:void(0)" class="edit" onclick="editClass();">
 						<abbr title="edit">
 							<i class="material-icons">mode</i>
 						</abbr>
 
 					</a>
-					<a href="javascript:void(0)" class="delete">
+					<a href="javascript:void(0)" onclick="deleteClassModal('{{obj.id}}');">
 						<abbr title="delete">
 							<i class="material-icons">delete_outline</i>
 						</abbr>
@@ -89,10 +93,12 @@
 				<p>do you really want to delete this class A</p>
 
 				<div class="modal-option">
-					<button class="btn-modal-yes" type="">yes</button>
+					<button class="btn-modal-yes" name="btn-modal-yes" type="">yes</button>
 					<button class="btn-modal-no" type="">no</button>
 				</div>
 			</div>
+
+
 
 			<div class="modal-box-edit">
 				<h4>edit class A</h4>
@@ -149,42 +155,60 @@
 
 		}
 
+
+		function deleteClassModal(id) {
+			event.stopPropagation();
+
+			console.log('class_id:' + id);
+
+			$.ajax({
+				type: 'POST',
+				url: '/app_classway/app_delete_class/',
+				data: {
+					'class_id': JSON.stringify(id),
+					csrfmiddlewaretoken: '{{ csrf_token }}'
+
+				},
+				dataType: 'json',
+
+				success: function (response) {
+					console.log("response:" + response.data);
+					console.log("class_name:" + response.class_name);
+
+
+					$('.modal-box-delete').css({
+						"display": "flex"
+					});
+
+					$('.modal-box-delete p').text('Do you want to delete "' + response.class_name + '"');
+
+					$('.class-box').css({
+						"opacity": "0.3"
+					});
+
+				}
+
+			});
+
+		}
+
+
+		function editClass(){
+			event.stopPropagation();
+			alert('coming soon...');
+		}
+
 		$(document).ready(function () {
 
 
-			/*$('.class-box').click(function () {
-				$.ajax({
-					url: "/app_classway/app_class_details_enrolled/",
 
-					success: function (result, status) {
-						$('.working-area').html(result);
-					},
-					error: function (result) {
-						console.log('error:'+result.status)
-					}
-
-				});
-
-			});*/
-
-			$('.delete, .copy-text').on('click', function (event) {
+			$('.copy-text').on('click', function (event) {
 				event.stopPropagation();
-
-				alert('hiiii')
+				alert('copy text')
 			});
 
 
-			$('.delete').click(function () {
-				$('.modal-box-delete').css({
-					"display": "flex"
-				});
-
-				$('.class-box').css({
-					"opacity": "0.3"
-				});
-			});
-
-			$('.btn-modal-yes, .btn-modal-no').click(function () {
+			$('.btn-modal-no').click(function () {
 				$('.modal-box-delete').css({
 					"display": "none"
 				});
@@ -194,10 +218,51 @@
 				});
 			});
 
+			$('.btn-modal-yes').click(function () {
+				$.ajax({
+					type: 'POST',
+					url: '/app_classway/app_delete_class/',
+
+					data: {
+						csrfmiddlewaretoken: '{{ csrf_token }}'
+					},
+					success: function (response) {
+
+
+						$.ajax({
+							url: "/app_classway/app_available_class/",
+							type: 'GET',
+
+							success: function (result) {
+								$('.working-area').html(result)
+
+								modalMsg = 'class deleted...';
+
+								$('.msg-modal-main').css({
+									'right': '0'
+								});
+								$('.msg-modal-main').text(modalMsg);
+
+								setTimeout(function () {
+									$('.msg-modal-main').css({
+										'right': '-100%'
+									});
+								}, 2000)
+
+
+							}
+
+						});
+
+
+					}
+				});
+			});
+
 
 			//--------------
 
-			$('.edit').click(function () {
+			/*$('.edit').click(function () {
 				$('.modal-box-edit').css({
 					"display": "flex"
 				});
@@ -205,7 +270,7 @@
 				$('.class-box').css({
 					"opacity": "0.3"
 				});
-			});
+			});*/
 
 			$('.btn-modal-edit').click(function () {
 				$('.modal-box-edit').css({

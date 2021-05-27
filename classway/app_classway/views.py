@@ -80,6 +80,8 @@ def app_class_performance(request):
     return render(request, 'temp_app_classway/app_class_performance.html')
 
 # ***
+
+
 def app_view_question(request):
     if request.method == 'POST':
         shit_data1 = request.POST.get('getdata1', 'None')
@@ -519,9 +521,12 @@ def app_available_class_enrolled(request):
     # print(obj_total_enrolled_classes[0].class_id.class_subject)
     # print(obj_total_enrolled_classes[1].class_id.class_subject)
 
-    return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
-        'obj_total_enrolled_classes': obj_total_enrolled_classes
-    })
+    if obj_total_enrolled_classes:
+        return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
+            'obj_total_enrolled_classes': obj_total_enrolled_classes
+        })
+    else:
+        return render(request, 'temp_app_classway/app_no_enrolled_class.html')
 
 
 # ####################################################################################################################################
@@ -656,10 +661,10 @@ def app_add_answer(request):
                 msg = 'answer submitted...'
 
                 return render(request, 'temp_app_classway/app_add_answer.html', {
-                    'obj_form': obj_form, 
-                    'class_name': class_name, 
+                    'obj_form': obj_form,
+                    'class_name': class_name,
                     'msg': msg,
-                    'qn_desc':qn_desc
+                    'qn_desc': qn_desc
                 })
 
             # print('desc:',obj_form.cleaned_data['ans_desc'])
@@ -667,7 +672,7 @@ def app_add_answer(request):
                 'obj_form': obj_form,
                 'class_name': class_name,
                 'msg': msg,
-                'qn_desc':qn_desc
+                'qn_desc': qn_desc
             })
 
         else:
@@ -704,7 +709,7 @@ def app_add_answer(request):
             obj_class = Class.objects.filter(id=class_idx)
             # global class_name
             class_name = obj_class[0].class_name
-            print('class_name:',class_name)
+            print('class_name:', class_name)
 
             obj_qn = Question.objects.filter(id=qn_idx)
             # global qn_desc
@@ -731,5 +736,71 @@ def app_add_answer(request):
         return render(request, 'temp_app_classway/app_add_answer.html', {
             'obj_form': obj_form,
             'class_name': class_name,
-            'qn_desc':qn_desc
+            'qn_desc': qn_desc
         })
+
+
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
+
+def app_delete_class(request):
+    if request.method=='POST':
+        global class_id
+
+        if 'class_id' not in request.POST:
+            print('yes by user')
+
+            del_row = Class.objects.get(id=class_id)
+            del_row.delete()
+
+            return render(request, 'temp_app_classway/app_class_details.html')
+
+        else:
+            print('1st call')
+
+            shit_data = request.POST.get('class_id', 'None')
+
+            bad_char = ['"']
+            for i in bad_char:
+                x = shit_data.replace(i, '')
+
+            class_id = int(x)
+
+            obj_del_class = Class.objects.filter(id=class_id)
+            class_name = obj_del_class[0].class_name
+
+            responseData = {
+                'data': 'response from app_delete_class...',
+                'class_name': class_name
+            }
+
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+
+    else:
+        responseData = {
+            'data': "something's wrong"
+        }
+
+        return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+
+
+def app_exit_class(request):
+    pass
+
+
+def app_edit_class(request):
+    pass

@@ -61,7 +61,12 @@
 
 			{% for obj_class in obj_class %}
 			<button type="" class="btn-addqn" onclick="return getInfo2('{{obj_class.id}}')">add question</button>
-			<button type="" class="btn-performance">performance</button>
+			<button type="" class="btn-students" onclick="performance();">students</button>
+			<button type="" class="btn-students" onclick="performance();">insights</button>
+
+
+			<button type="" class="btn-performance" onclick="performance();">performance</button>
+
 			{% endfor %}
 			<!-- <button type="" class="btn-addqn"onclick="return getInfo('{{obj_class.id}}')">add question</button>
 			<button type="" class="btn-performance">performance</button> -->
@@ -73,6 +78,10 @@
 
 
 	<script>
+
+		function performance(){
+			alert('coming soon...');
+		}
 
 
 		function getInfo(data1, data2) {
@@ -160,10 +169,10 @@
 
 
 
-			$('.btn-performance').click(function () {
+			/*$('.btn-performance').click(function () {
 				$('.user_class_classdetails').load('/app_classway/app_class_performance');
 
-			});
+			});*/
 
 			/*$('.row-link').click(function () {
 				$('.user_class_classdetails').load('/app_classway/app_view_question');
