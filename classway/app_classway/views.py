@@ -798,8 +798,53 @@ def app_delete_class(request):
 
 
 
+
 def app_exit_class(request):
-    pass
+    if request.method=='POST':
+        global class_id
+
+        if 'class_id' not in request.POST:
+            print('yes by user')
+
+            stud_id = get_user_id(request)
+
+            print('user_id:',stud_id)
+
+            del_row = Enroll.objects.get(class_id = class_id,user_id=stud_id)
+            print(del_row)
+            del_row.delete()
+
+            return render(request, 'temp_app_classway/app_class_details.html')
+
+        else:
+            print('1st call')
+
+            shit_data = request.POST.get('class_id', 'None')
+
+            bad_char = ['"']
+            for i in bad_char:
+                x = shit_data.replace(i, '')
+
+            class_id = int(x)
+
+            obj_del_class = Class.objects.filter(id=class_id)
+            class_name = obj_del_class[0].class_name
+
+            responseData = {
+                'data': 'response from app_delete_class...',
+                'class_name': class_name
+            }
+
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+
+    else:
+        responseData = {
+            'data': "something's wrong"
+        }
+
+        return HttpResponse(json.dumps(responseData), content_type="application/json")
+
 
 
 def app_edit_class(request):

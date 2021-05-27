@@ -34,6 +34,8 @@ urlpatterns = [
 
 
     path('app_delete_class/', views.app_delete_class, name="app_delete_class"),
+    path('app_exit_class/', views.app_exit_class, name="app_exit_class"),
+
 
 
     # path('app_class_performance/', views.app_class_performance, name="app_class_performance"),
