@@ -10,12 +10,12 @@
     background-color: #eeeeee;
     overflow-y: scroll;
     position: relative;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    overflow: auto;
+    overflow: auto; */
 }
 
 .user_class_availableclass h3 {
@@ -288,4 +288,20 @@
     .user_class_availableclass .modal-box-edit {
         width: 300px;
     }
+}
+
+.copy-text{
+    transition: 0.1s;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
+    -ms-transition: 0.1s;
+    -o-transition: 0.1s;
+}
+
+.copy-text:hover{
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
 }

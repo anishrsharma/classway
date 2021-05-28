@@ -24,7 +24,7 @@
 		</abbr>
 
 		{% for obj_class in obj_class %}
-		<h3>{{obj_class.class_name}} [{{obj_class.class_subject}}]</h3>
+		<h3>{{obj_class.class_name}} ({{obj_class.class_subject}})</h3>
 
 
 
@@ -61,8 +61,8 @@
 
 			{% for obj_class in obj_class %}
 			<button type="" class="btn-addqn" onclick="return getInfo2('{{obj_class.id}}')">add question</button>
-			<button type="" class="btn-students" onclick="performance();">students</button>
-			<button type="" class="btn-students" onclick="performance();">insights</button>
+			<button type="" class="btn-students" >students</button>
+			<button type="" class="btn-insights" >insights</button>
 
 
 			<button type="" class="btn-performance" onclick="performance();">performance</button>
@@ -78,6 +78,9 @@
 
 
 	<script>
+
+
+
 
 		function performance(){
 			alert('coming soon...');
@@ -151,6 +154,15 @@
 
 
 		$(document).ready(function () {
+
+
+
+			$('.btn-students').click(function(){
+				//$('.working-area').html('')
+				$('.working-area').load('/app_classway/app_view_students/');
+
+			})
+
 
 			// back btn
 			$('.btn-back').click(function () {

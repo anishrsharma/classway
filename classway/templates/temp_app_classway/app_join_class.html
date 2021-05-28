@@ -16,6 +16,7 @@
 <body>
     <div class="user_class_joinclass">
 
+        <h3 style="position: absolute; top: 20px; color: rgb(3, 80, 111); text-transform: uppercase;">join class</h3>
 
         <form action="" id="frm-join-class" style=" position: relative;">
             {% csrf_token %}
@@ -28,7 +29,6 @@
 
 
 
-            <h3>join class</h3>
 
             {{join_class_form.class_code}}
             <button class="btn-join" type="submit">join</button>

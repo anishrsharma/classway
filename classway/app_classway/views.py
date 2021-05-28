@@ -849,3 +849,9 @@ def app_exit_class(request):
 
 def app_edit_class(request):
     pass
+
+
+def app_view_students(request):
+    return render(request, 'temp_app_classway/app_view_students.html')
+
+

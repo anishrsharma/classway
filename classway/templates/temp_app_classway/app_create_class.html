@@ -14,6 +14,7 @@
 
 <body>
     <div class="user_class_createclass">
+        <h3 style="position: absolute; top: 20px; color: rgb(3, 80, 111); text-transform: uppercase;">create class</h3>
 
         <!-- <a href="">
             <i class="fa fa-angle-left"></i>
@@ -21,7 +22,7 @@
 
         <form id="frm-create-class">
             {% csrf_token %}
-            <h3>new class</h3>
+            <!-- <h3>new class</h3> -->
 
 
             {{create_class_form.class_name}}
@@ -45,6 +46,23 @@
                     data: frm.serialize(),
                     success: function (result) {
                         $('.working-area').html(result);
+
+
+                        modalMsg = 'class created';
+
+
+                        $('.msg-modal-main').css({
+                            'right': '0'
+                        });
+                        $('.msg-modal-main').text(modalMsg);
+
+                        setTimeout(function () {
+                            $('.msg-modal-main').css({
+                                'right': '-100%'
+                            });
+                        }, 2000)
+
+
 
                         $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                             "background-color": "",
