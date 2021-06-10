@@ -66,6 +66,8 @@
     justify-content: space-around;
     padding: 30px;
     flex-flow: wrap;
+    /* flex-basis: content; */
+    
 }
 
 .user_class_availableclass .container-class a {

@@ -27,8 +27,8 @@
 
 			{% if obj_total_enrolled_classes %}
 
-			{% for obj in obj_total_enrolled_classes %}
 
+			{% for obj in obj_total_enrolled_classes %}
 
 			<div class="class-box" onclick="getInfo('{{obj.class_id.id}}');">
 				<div class="class-box-name">
@@ -42,6 +42,12 @@
 					<ul>
 						<li>subject: {{obj.class_id.class_subject}}</li>
 						<li>students: N/A</li>
+						<li>admin: N/A</li>
+						
+						{% comment %} {% for name in list_admin_name %}
+							{{forloop.counter0}}
+							{{name}}
+						{% endfor %} {% endcomment %}
 
 					</ul>
 				</div>
@@ -66,8 +72,8 @@
 
 
 
-
 			{% endfor %}
+			
 
 			{% endif %}
 
@@ -227,7 +233,7 @@
 							success: function (result) {
 								$('.working-area').html(result)
 
-								modalMsg = 'class deleted...';
+								modalMsg = 'class exited...';
 
 								$('.msg-modal-main').css({
 									'right': '0'

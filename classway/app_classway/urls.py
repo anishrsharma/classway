@@ -40,6 +40,9 @@ urlpatterns = [
 
 
 
+
+
+
     # path('app_class_performance/', views.app_class_performance, name="app_class_performance"),
 
 

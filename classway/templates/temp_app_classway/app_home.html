@@ -6,7 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home | user</title>
+    <title>
+    
+    {% if 'logged_in_user_name' in request.session %}
+        {{request.session.logged_in_user_name}} | classway 
+    
+    {% else %}
+        classway
+    {% endif %}
+    </title>
     <link rel="stylesheet" href="{% static 'css/style_app_classway/app_home.css'%}">
 
 
@@ -45,7 +53,7 @@
             </a>
 
 
-            <i style="color: #eeeeee;">user: {{request.session.logged_in_user}}</i>
+            <p style="color: #eeeeee; font-size: 13px;">user: {{request.session.logged_in_user_name}} ({{request.session.logged_in_user}})</p>
 
             <a  href="/app_classway/app_join_class" class="btn-account"
                 id="btn-join">
@@ -83,7 +91,7 @@
                     <hr>
                     <button id="btnm" class="btn-status">status</button>
                     <hr>
-                    <button id="btnm" class="btn-account">account</button>
+                    <button id="btnm" class="btn-account">{{request.session.logged_in_user_name}}</button>
                     <hr>
 
                 </ul>

@@ -46,13 +46,15 @@ abbr {
 }
 
 .first-nav label {
-    /* border: 1px solid red; */
     font-size: 30px;
-    color: #eeeeee;
+    color: rgba(238, 238, 238, 0.5);
+    /* text-shadow: 0px 0px 10px rgb(238, 238, 238,0.5); */
+    /* text-shadow: 0px 0px 8px rgba(238, 238, 238, 0.5); */
+    
+    /* text-shadow: 0 0 3px #ff0000; */
     cursor: pointer;
-    /* text-decoration: none; */
     font-family: font-logo;
-    /* letter-spacing: 5px; */
+    font-weight: lighter;
 }
 
 .first-nav a {

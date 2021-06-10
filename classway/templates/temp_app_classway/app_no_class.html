@@ -27,10 +27,20 @@
 
 
     <script>
-        $(document).ready(function() {
-           
-            $('.btn-create-class').click(function() {
+        $(document).ready(function () {
+
+            $('.btn-create-class').click(function () {
                 $(".working-area").load("/app_classway/app_create_class");
+
+                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                    "background-color": "",
+                    "color": ""
+                });
+
+                $('.btn-new-class').css({
+                    "background-color": "#eeeeee",
+                    "color": "#393e46"
+                });
             });
         });
     </script>

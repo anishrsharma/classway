@@ -228,8 +228,73 @@ def app_status_page(request):
     return render(request, 'temp_app_classway/app_status_page.html')
 
 
+# --------------------------------------------------------------------------
+
 def app_todo_page(request):
-    return render(request, 'temp_app_classway/app_todo_page.html')
+    user_id = get_user_id(request)
+
+    obj_enrolled_classes = Enroll.objects.filter(user_id=user_id)
+    print(obj_enrolled_classes)
+
+
+    user_id = get_user_id(request)
+    print("user_id:",user_id)
+
+    list_pendings = []
+    # list_
+
+    for i in obj_enrolled_classes:
+        obj_qn = Question.objects.filter(class_id = i.class_id.id)
+        for j in obj_qn:
+            print(j.id)
+
+            check_ans = Answer.objects.filter(qn_id = j.id, user_id=user_id)
+            print(check_ans)
+            if check_ans:
+                print("hii")
+            else:
+                print(j," is empty")
+                list_pendings.append(j)
+
+    print(list_pendings)
+
+    for k in list_pendings:
+        print("desc:",k.qn_desc)
+        print("id:",k.id)
+        print("deadline:",k.qn_deadline)
+        print("class_name:",k.class_id.class_name)
+
+
+
+            # print(j.qn_desc)
+            
+        # break;    
+
+
+
+
+
+
+
+    # class_id1 = obj_enrolled_classes[0].class_id.id
+    
+    # obj_total_qns1 = Question.objects.filter(class_id = class_id1)
+    # print(obj_total_qns1)
+
+
+
+    # class_id2 = obj_enrolled_classes[1].class_id.id
+
+    # obj_total_qns2 = Question.objects.filter(class_id = class_id2)
+    # print(obj_total_qns2)
+
+
+
+
+    return render(request, 'temp_app_classway/app_todo_page.html',{
+        'obj_enrolled_classes':obj_enrolled_classes,
+        'list_pendings':list_pendings
+    })
 
 
 ######################################################################################
@@ -518,12 +583,66 @@ def app_available_class_enrolled(request):
 
     # getting all enrolled classes by this user:
     obj_total_enrolled_classes = Enroll.objects.filter(user_id=user_id)
-    # print(obj_total_enrolled_classes[0].class_id.class_subject)
-    # print(obj_total_enrolled_classes[1].class_id.class_subject)
+
+    # -----------------------------------
+    # -----------------------------------
+
+
+    list_admin_name = []
+
+    for i in obj_total_enrolled_classes:
+        admin_id =i.class_id.class_admin 
+        obj_admin_name = User.objects.get(id = admin_id)
+        name = obj_admin_name.first_name
+        list_admin_name.append(name)
+
+
+    
+    print(list_admin_name)
+
+    for i in list_admin_name:
+        print(i)
+
+    # -----------------------------------
+    # -----------------------------------
+
+    print('------------------')
+
+    for index, item in enumerate(obj_total_enrolled_classes):
+        print(index)
+        print(item.class_id.class_name)
+        print(list_admin_name[index])
+
+
+
+    # for i in range(obj_total_enrolled_classes.__len__()):
+    #     print(obj_total_enrolled_classes[i])
+
+
+
+
+
+    # for i in obj_total_enrolled_classes:
+    #     admin_id =i.class_id.class_admin 
+    #     print(admin_id)
+
+    #     obj_admin_name = User.objects.get(id = admin_id)
+    #     print(obj_admin_name.first_name+' '+obj_admin_name.last_name)
+
+
+    # print('obj_total_enrolled_classes:',obj_total_enrolled_classes[0].class_id.class_admin)
+    
+    # temp = obj_total_enrolled_classes[0].class_id.class_admin
+
+    # class_admin = User.objects.get(id = temp)
+    # print(class_admin.first_name+' '+class_admin.last_name)
+
+
 
     if obj_total_enrolled_classes:
         return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
-            'obj_total_enrolled_classes': obj_total_enrolled_classes
+            'obj_total_enrolled_classes': obj_total_enrolled_classes,
+            'list_admin_name':list_admin_name
         })
     else:
         return render(request, 'temp_app_classway/app_no_enrolled_class.html')
@@ -853,5 +972,22 @@ def app_edit_class(request):
 
 def app_view_students(request):
     return render(request, 'temp_app_classway/app_view_students.html')
+
+
+
+
+
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
 
 

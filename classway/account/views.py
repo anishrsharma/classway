@@ -68,7 +68,14 @@ def login(request):
             if User.objects.filter(email=em, password=ps).exists():
                 # msg = 'login success...'
                 print('login success')
+
                 request.session['logged_in_user'] = em
+
+                obj_name = User.objects.get(email=em)
+
+                request.session['logged_in_user_name'] = obj_name.first_name
+                print(request.session['logged_in_user_name'])
+
 
                 # return redirect('/website/home')
                 return redirect('/app_classway/app_home')
