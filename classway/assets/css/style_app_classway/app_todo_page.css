@@ -31,17 +31,18 @@
 
 .app-todo-page table{
     /* border-left: 1px solid red; */
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     overflow: auto;
     margin: 20px 0 0 0 ;
+    /* border: 2px solid #ffffff; */
     /* position: absolute; */
     /* top: 50px; */
 }
 
 .app-todo-page table td{
-    border-bottom: 1px solid rgb(3, 80, 111,0.5);
-    padding: 7px;
+    /*border-bottom: 1px solid rgb(3, 80, 111,0.5);
+    */padding: 7px;
     transition: 0.2s;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
@@ -58,23 +59,35 @@
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
+
+
 }
 
 
 
 .app-todo-page table tr{
+
+    
     transition: 0.2s;
     -webkit-transition: 0.2s;
     -moz-transition: 0.2s;
     -ms-transition: 0.2s;
     -o-transition: 0.2s;
+
+
+
 }
 
-.app-todo-page table tr:nth-child(1){
-    border-top: 1px solid rgb(3, 80, 111,0.5);
+.app-todo-page table tr:nth-child(odd) {
+    background-color: rgb(255, 255, 255);
+
 }
+
+/* .app-todo-page table tr:nth-child(1){
+    border-top: 1px solid rgb(3, 80, 111,0.5);
+} */
 
 
 .app-todo-page table tr:hover{
-    background-color: #a3ddcb;
+    background-color: rgb(163, 221, 203);
 }
