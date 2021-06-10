@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>view_qn</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style_app_classway/app_add_answer.css' %}">
+</head>
+
+<body>
+	<div class="user_class_takeanswer">
+
+		<abbr title="back">
+			<a href="javascript:void(0)" class="btn-back">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</abbr>
+
+		<form action="" id="frm-add-ans">
+			<h2>{{class_name}}</h2>
+
+			<p class="msg" style="display: none;">{{msg}}</p>
+
+			<p><span><b>Question:<br> </b></span>{{qn_desc}}</p>
+
+			<p class="info"><i>[marks: 5]<br> [asked on: 21 jan 2021]<br> [due date: 25 jan 2021]</i></p>
+			{% csrf_token %}
+
+			{{obj_form.ans_desc}}
+
+			<label for="upload">or upload answer[pdf/vnd]:
+				<input id="upload" type="file" class="inp" accept="application/pdf,application/vnd.ms-excel">
+			</label>
+			<button type="submit">submit</button>
+		</form>
+	</div>
+
+
+
+
+	<script>
+		$(document).ready(function () {
+			var frm = $('#frm-add-ans');
+			frm.submit(function () {
+				$.ajax({
+					type: 'POST',
+					url: '/app_classway/app_add_answer_todo/',
+					data: frm.serialize(),
+
+					success: function (result) {
+						//console.log(result)
+						$('.working-area').html(result);
+
+                        modalMsg = $('.msg').text();
+
+						$('.msg-modal-main').css({
+							'right': '0'
+						});
+						$('.msg-modal-main').text(modalMsg);
+
+						setTimeout(function () {
+							$('.msg-modal-main').css({
+								'right': '-100%'
+							});
+						}, 2000)
+
+
+					
+
+
+
+					},
+					error: function (result) {
+						console.log('error...')
+					}
+				});
+				return false;
+
+			});
+
+
+
+
+
+
+			$('.btn-back').click(function () {
+                $.ajax({
+                    url: '/app_classway/app_todo_page/',
+                    success: function (result) {
+                        $('.working-area').html(result);
+                    }
+                });
+            });
+
+		})
+	</script>
+</body>
+
+</html>

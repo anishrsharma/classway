@@ -37,6 +37,9 @@ urlpatterns = [
     path('app_exit_class/', views.app_exit_class, name="app_exit_class"),
     path('app_view_students/', views.app_view_students, name="app_view_students"),
 
+    path('app_add_answer_todo/', views.app_add_answer_todo, name="app_add_answer_todo"),
+
+
 
 
 

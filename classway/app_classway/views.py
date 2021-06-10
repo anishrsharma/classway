@@ -228,6 +228,125 @@ def app_status_page(request):
     return render(request, 'temp_app_classway/app_status_page.html')
 
 
+def app_add_answer_todo(request):
+    
+    if request.method == 'POST':
+        print('post')
+
+        obj_form = ModelFormAddAnswer(request.POST)
+        global class_name
+        global qn_desc
+
+        global class_idx
+        global qn_idx
+        global user_idx
+
+        if obj_form.is_valid():
+            print('valid')
+
+            obj_qn = Question.objects.filter(id=qn_idx)
+            print('obj_qn', obj_qn)
+
+            obj_user = User.objects.filter(id=user_idx)
+            print('obj_user', obj_user)
+
+            ans_desc = obj_form.cleaned_data['ans_desc']
+
+            if Answer.objects.filter(qn_id=obj_qn[0], user_id=obj_user[0]).exists():
+                msg = 'already answered...'
+
+            else:
+                # FK mei obj store hoga
+                insert_ans = Answer(
+                    qn_id=obj_qn[0], user_id=obj_user[0], ans_desc=ans_desc)
+                insert_ans.save()
+                print('answer saved...')
+                msg = 'answer submitted...'
+
+                return render(request, 'temp_app_classway/app_add_answer_todo.html', {
+                    'obj_form': obj_form,
+                    'class_name': class_name,
+                    'msg': msg,
+                    'qn_desc': qn_desc
+                })
+
+            # print('desc:',obj_form.cleaned_data['ans_desc'])
+            return render(request, 'temp_app_classway/app_add_answer_todo.html', {
+                'obj_form': obj_form,
+                'class_name': class_name,
+                'msg': msg,
+                'qn_desc': qn_desc
+            })
+
+        else:
+
+            print('invalid form...')
+
+            shit_data1 = request.POST.get('getdata1', 'None')
+            shit_data2 = request.POST.get('getdata2', 'None')
+
+            print(shit_data1)
+            print(shit_data2)
+
+            bad_char = ['"']
+
+            for i in bad_char:
+                x = shit_data1.replace(i, '')
+
+            for i in bad_char:
+                y = shit_data2.replace(i, '')
+
+            # global class_idx
+            # global qn_idx
+            # global user_idx
+
+            class_idx = int(x)
+            qn_idx = int(y)
+
+            user_idx = get_user_id(request)
+
+            print('class_id:', class_idx)
+            print('qn_id:', qn_idx)
+            print('user_id:', user_idx)
+
+            obj_class = Class.objects.filter(id=class_idx)
+            # global class_name
+            class_name = obj_class[0].class_name
+            print('class_name:', class_name)
+
+            obj_qn = Question.objects.filter(id=qn_idx)
+            # global qn_desc
+            qn_desc = obj_qn[0].qn_desc
+            print(qn_desc)
+
+            responseData = {
+                # 'id': 4,
+                # 'name': 'Test Response',
+                # 'roles' : ['Admin','User']
+                'page': 'hii response...'
+
+            }
+
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+            # obj_form = ModelFormAddAnswer()
+            # return render(request, 'temp_app_classway/app_add_answer.html',{'obj_form':obj_form})
+
+    else:
+        print('get')
+        # return redirect('/app_classway/app_add_answer/')
+        obj_form = ModelFormAddAnswer()
+        return render(request, 'temp_app_classway/app_add_answer_todo.html', {
+            'obj_form': obj_form,
+            'class_name': class_name,
+            'qn_desc': qn_desc
+        })
+
+    # return render(request, 'temp_app_classway/app_add_answer_todo.html')
+
+
+
+
 # --------------------------------------------------------------------------
 
 def app_todo_page(request):
