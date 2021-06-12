@@ -31,7 +31,7 @@
 
 			<p><span><b>Question:<br> </b></span>{{qn_desc}}</p>
 
-			<p class="info"><i>[marks: 5]<br> [asked on: 21 jan 2021]<br> [due date: 25 jan 2021]</i></p>
+			<p class="info"><i>[marks: {{qn_marks}}]<br> [asked on: {{qn_date}}]<br> [deadline: {{qn_deadline}}]</i></p>
 			{% csrf_token %}
 
 			{{obj_form.ans_desc}}

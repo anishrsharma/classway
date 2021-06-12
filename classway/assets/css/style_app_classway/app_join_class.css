@@ -14,11 +14,11 @@
     background-color: #eeeeee;
     position: relative;
     z-index: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/static/img/material-style-tapet-simple-4k-6b.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
 }
 
 .user_class_joinclass a {

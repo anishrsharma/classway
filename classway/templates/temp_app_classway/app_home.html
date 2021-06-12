@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-    
-    {% if 'logged_in_user_name' in request.session %}
-        {{request.session.logged_in_user_name}} | classway 
-    
-    {% else %}
+
+        {% if 'logged_in_user_name' in request.session %}
+        {{request.session.logged_in_user_name}}@classway
+
+        {% else %}
         classway
-    {% endif %}
+        {% endif %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style_app_classway/app_home.css'%}">
 
@@ -53,12 +53,15 @@
             </a>
 
 
-            <p style="color: #eeeeee; font-size: 13px;">user: {{request.session.logged_in_user_name}} ({{request.session.logged_in_user}})</p>
+            <p style="color: #eeeeee; font-size: 13px;">user: {{request.session.logged_in_user_name}}
+                ({{request.session.logged_in_user}})</p>
 
-            <a  href="/app_classway/app_join_class" class="btn-account"
-                id="btn-join">
-                <i class="material-icons">post_add</i> join class
-            </a>
+            <abbr title="{{request.session.logged_in_user_name}}">
+                <a href="/app_classway/app_join_class" style="justify-content: center;" class="btn-account"
+                    id="btn-account">
+                    <i class="material-icons" style="margin: 0 5px 0 0 ;">account_circle</i> account
+                </a>
+            </abbr>
 
 
 
@@ -83,16 +86,27 @@
                     <hr>
                     <button id="btnm" class="btn-classes">classes</button>
                     <hr>
-                    <button id="btnm" class="btn-my-classes">my classes</button>
-                    <hr>
-                    <button id="btnm" class="btn-new-class">new class</button>
-                    <hr>
                     <button id="btnm" class="btn-todo">todo</button>
+                    <hr>
+
+                    <button id="btnm" class="btn-join" id="btn-join">join</button>
+                    <hr>
+
+                    <hr
+                        style="background:linear-gradient(to right,rgba(238, 238, 238, 0),rgba(238, 238, 238, 0.5),rgba(238, 238, 238, 0));height: 1px;width: 90%;">
+
+                    <hr>
+
+                    <button id="btnm" class="btn-my-classes">my classes</button>
                     <hr>
                     <button id="btnm" class="btn-status">status</button>
                     <hr>
-                    <button id="btnm" class="btn-account">{{request.session.logged_in_user_name}}</button>
+
+                    <button id="btnm" class="btn-new-class">new class</button>
                     <hr>
+
+                    <!-- <button id="btnm" class="btn-account">{{request.session.logged_in_user_name}}</button>
+                    <hr> -->
 
                 </ul>
             </div>
@@ -138,7 +152,7 @@
                 var clickedAttr = $(this).attr('class'); // or var clickedBtnID = this.class
 
 
-                $('.btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
+                $('.btn-join, .btn-classes, .btn-my-classes, .btn-new-class, .btn-todo, .btn-status,.btn-account').css({
                     "background-color": "",
                     "color": ""
                 });
@@ -148,7 +162,7 @@
                     "color": "#393e46"
                 });
 
-                
+
 
 
                 switch (clickedAttr) {
@@ -169,6 +183,9 @@
 
                     case 'btn-account':
                         link = "/app_classway/app_account_page/"; break;
+
+                    case 'btn-join':
+                        link = "/app_classway/app_join_class/"; break;
 
                     default:
                         console.log('error...');
@@ -209,11 +226,11 @@
 
 
         $(document).ready(function () {
-            var frm = $('#btn-join');
+            var frm = $('#btn-account');
             frm.click(function () {
                 $.ajax({
                     //type: 'POST',
-                    url: '/app_classway/app_join_class/',
+                    url: '/app_classway/app_account_page/',
                     //data: frm.serialize(),
                     success: function (result) {
                         $('.working-area').html(result);

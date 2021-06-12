@@ -236,6 +236,9 @@ def app_add_answer_todo(request):
         obj_form = ModelFormAddAnswer(request.POST)
         global class_name
         global qn_desc
+        global qn_date
+        global qn_marks
+        global qn_deadline
 
         global class_idx
         global qn_idx
@@ -319,6 +322,14 @@ def app_add_answer_todo(request):
             qn_desc = obj_qn[0].qn_desc
             print(qn_desc)
 
+
+            qn_marks =obj_qn[0].qn_marks 
+
+            qn_date = obj_qn[0].qn_date
+            # print(qn_date)
+
+            qn_deadline = obj_qn[0].qn_deadline
+
             responseData = {
                 # 'id': 4,
                 # 'name': 'Test Response',
@@ -339,7 +350,10 @@ def app_add_answer_todo(request):
         return render(request, 'temp_app_classway/app_add_answer_todo.html', {
             'obj_form': obj_form,
             'class_name': class_name,
-            'qn_desc': qn_desc
+            'qn_desc': qn_desc,
+            'qn_date':qn_date,
+            'qn_deadline':qn_deadline,
+            'qn_marks':qn_marks
         })
 
     # return render(request, 'temp_app_classway/app_add_answer_todo.html')
@@ -871,6 +885,9 @@ def app_add_answer(request):
         obj_form = ModelFormAddAnswer(request.POST)
         global class_name
         global qn_desc
+        global qn_date
+        global qn_marks
+        global qn_deadline
 
         global class_idx
         global qn_idx
@@ -949,10 +966,22 @@ def app_add_answer(request):
             class_name = obj_class[0].class_name
             print('class_name:', class_name)
 
+
+
             obj_qn = Question.objects.filter(id=qn_idx)
             # global qn_desc
             qn_desc = obj_qn[0].qn_desc
             print(qn_desc)
+
+            qn_marks =obj_qn[0].qn_marks 
+
+            qn_date = obj_qn[0].qn_date
+            # print(qn_date)
+
+            qn_deadline = obj_qn[0].qn_deadline
+            # print(qn_deadline)
+
+
 
             responseData = {
                 # 'id': 4,
@@ -974,7 +1003,10 @@ def app_add_answer(request):
         return render(request, 'temp_app_classway/app_add_answer.html', {
             'obj_form': obj_form,
             'class_name': class_name,
-            'qn_desc': qn_desc
+            'qn_desc': qn_desc,
+            'qn_date':qn_date,
+            'qn_deadline':qn_deadline,
+            'qn_marks':qn_marks
         })
 
 
