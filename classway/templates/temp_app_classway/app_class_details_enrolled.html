@@ -42,7 +42,7 @@
                 {% for obj_qn in obj_qn %}
 
                 <tr class="row-link" onclick="return getInfo('{{obj_class.id}}','{{obj_qn.id}}')">
-                    <td>{{obj_qn.id}}</td>
+                    <td>{{forloop.counter}}</td>
                     <td>{{obj_qn.qn_desc}}</td>
                     <td>{{obj_qn.qn_date}}</td>
                     <td>{{obj_qn.qn_deadline}}</td>
