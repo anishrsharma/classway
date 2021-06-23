@@ -4,197 +4,218 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>class_details</title>
-	<link rel="stylesheet" href="{% static 'css/style_app_classway/app_class_details.css' %}">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>class_details</title>
+    <link rel="stylesheet" href="{% static 'css/style_app_classway/app_class_details.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
-	<div class="user_class_classdetails">
+    <div class="user_class_classdetails">
 
-		<abbr title="back">
+        <abbr title="back">
 			<a href="javascript:void(0)" class="btn-back">
 				<i class="fa fa-angle-left"></i>
 			</a>
-		</abbr>
-
-		{% for obj_class in obj_class %}
-		<h3>{{obj_class.class_name}} ({{obj_class.class_subject}})</h3>
+		</abbr> {% for obj_class in obj_class %}
+        <h3>{{obj_class.class_name}} ({{obj_class.class_subject}})</h3>
 
 
 
 
-		<div class="tables">
-			<table>
-				<tr class="row-heading">
-					<th>sn</th>
-					<th style="width: 500px;">question</th>
-					<th>date</th>
-					<th>deadline</th>
-					<th>status</th>
-				</tr>
+        <div class="tables">
+            <table>
+                <tr class="row-heading">
+                    <th>sn</th>
+                    <th style="width: 500px;">question</th>
+                    <th>date</th>
+                    <th>deadline</th>
+                    <th>status</th>
+                </tr>
 
-				{% for obj_qn in obj_qn %}
+                {% for obj_qn in obj_qn %}
 
-				<tr class="row-link" onclick="return getInfo('{{obj_class.id}}','{{obj_qn.id}}')">
-					<td>{{obj_qn.id}}</td>
-					<td>{{obj_qn.qn_desc}}</td>
-					<td>{{obj_qn.qn_date}}</td>
-					<td>{{obj_qn.qn_deadline}}</td>
-					<td> 2/10 </td>
+                <tr class="row-link" onclick="return getInfo('{{obj_class.id}}','{{obj_qn.id}}')">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{obj_qn.qn_desc}}</td>
+                    <td>{{obj_qn.qn_date}}</td>
+                    <td>{{obj_qn.qn_deadline}}</td>
+                    <td> 2/10 </td>
 
-				</tr>
+                </tr>
 
-				{% endfor %}
+                {% endfor %}
 
-			</table>
-		</div>
+            </table>
+        </div>
 
-		{% endfor %}
+        {% endfor %}
 
-		<div class="more">
+        <div class="more">
 
-			{% for obj_class in obj_class %}
-			<button type="" class="btn-addqn" onclick="return getInfo2('{{obj_class.id}}')">add question</button>
-			<button type="" class="btn-students" >students</button>
-			<button type="" class="btn-insights" >insights</button>
+            {% for obj_class in obj_class %}
+            <button type="" class="btn-addqn" onclick="return getInfo2('{{obj_class.id}}')">add question</button>
+            <button type="" class="btn-students" onclick="return getInfo3('{{obj_class.id}}')">students</button>
+            <button type="" class="btn-insights">insights</button>
 
 
-			<button type="" class="btn-performance" onclick="performance();">performance</button>
-
-			{% endfor %}
-			<!-- <button type="" class="btn-addqn"onclick="return getInfo('{{obj_class.id}}')">add question</button>
+            <button type="" class="btn-performance" onclick="performance();">performance</button> {% endfor %}
+            <!-- <button type="" class="btn-addqn"onclick="return getInfo('{{obj_class.id}}')">add question</button>
 			<button type="" class="btn-performance">performance</button> -->
 
-		</div>
+        </div>
 
 
-	</div>
+    </div>
 
 
-	<script>
+    <script>
+        function performance() {
+            alert('coming soon...');
+        }
+
+
+        function getInfo(data1, data2) {
+            console.log('class_id:' + data1 + '\nqn_id:' + data2);
+
+            $.ajax({
+                url: "/app_classway/app_view_question/",
+                data: {
+                    'getdata1': JSON.stringify(data1),
+                    'getdata2': JSON.stringify(data2),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                dataType: 'json',
+                type: 'POST',
+
+
+                success: function(result) {
+                    //alert('success:' + result.page)
+
+                    $.ajax({
+                        url: "/app_classway/app_view_question/",
+                        type: 'GET',
+                        success: function(result) {
+                            console.log('result:' + result.page);
+                            $('.working-area').html(result)
+                        }
+
+                    });
+
+
+                }
+
+            });
+
+        }
+
+        function getInfo2(data) {
+
+            console.log('class_id:' + data);
+
+            $.ajax({
+                url: "/app_classway/app_add_question/",
+                data: {
+                    'getdata': JSON.stringify(data),
+                    //'getdata2': JSON.stringify(data2),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                dataType: 'json',
+                type: 'POST',
+
+
+                success: function(result) {
+
+                    $.ajax({
+                        url: "/app_classway/app_add_question/",
+                        type: 'GET',
+                        success: function(result) {
+                            console.log('result:' + result.page);
+                            $('.working-area').html(result)
+                        }
+                    });
+                }
+            });
+        }
+
+        function getInfo3(data) {
+
+            console.log('class_id:' + data);
+
+            $.ajax({
+                url: "/app_classway/app_view_students/",
+                data: {
+                    'getdata': JSON.stringify(data),
+                    //'getdata2': JSON.stringify(data2),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                },
+                dataType: 'json',
+                type: 'POST',
+
+
+                success: function(result) {
+
+                    $.ajax({
+                        url: "/app_classway/app_view_students/",
+                        type: 'GET',
+                        success: function(result) {
+                            console.log('result:' + result.page);
+                            $('.working-area').html(result)
+                        }
+                    });
+                }
+            });
+        }
+
+
+
+        $(document).ready(function() {
+
+
+
+            $('.btn-students').click(function() {
+                //$('.working-area').html('')
+                $('.working-area').load('/app_classway/app_view_students/');
+
+            })
+
+
+            // back btn
+            $('.btn-back').click(function() {
+                $.ajax({
+                    url: '/app_classway/app_available_class',
+
+                    success: function(result) {
+                        console.log('success back btn in classdetails...');
+                        $('.working-area').html(result);
+                    }
+                });
+            });
 
 
 
 
-		function performance(){
-			alert('coming soon...');
-		}
 
 
-		function getInfo(data1, data2) {
-			console.log('class_id:'+data1+'\nqn_id:'+data2);
+            /*$('.btn-performance').click(function () {
+            	$('.user_class_classdetails').load('/app_classway/app_class_performance');
 
-			$.ajax({
-				url: "/app_classway/app_view_question/",
-				data: {
-					'getdata1': JSON.stringify(data1),
-					'getdata2': JSON.stringify(data2),
-					csrfmiddlewaretoken: '{{ csrf_token }}'
+            });*/
 
-				},
-				dataType: 'json',
-				type: 'POST',
+            /*$('.row-link').click(function () {
+            	$('.user_class_classdetails').load('/app_classway/app_view_question');
+
+            });*/
 
 
-				success: function (result) {
-					//alert('success:' + result.page)
-
-					$.ajax({
-						url: "/app_classway/app_view_question/",
-						type: 'GET',
-						success: function (result) {
-							console.log('result:' + result.page);
-							$('.working-area').html(result)
-						}
-
-					});
-
-
-				}
-
-			});
-
-		}
-
-		function getInfo2(data) {
-
-			console.log('class_id:'+data);
-
-			$.ajax({
-				url: "/app_classway/app_add_question/",
-				data: {
-					'getdata': JSON.stringify(data),
-					//'getdata2': JSON.stringify(data2),
-					csrfmiddlewaretoken: '{{ csrf_token }}'
-
-				},
-				dataType: 'json',
-				type: 'POST',
-
-
-				success: function (result) {
-
-					$.ajax({
-						url: "/app_classway/app_add_question/",
-						type: 'GET',
-						success: function (result) {
-							console.log('result:' + result.page);
-							$('.working-area').html(result)
-						}
-					});
-				}
-			});
-		}
-
-
-		$(document).ready(function () {
-
-
-
-			$('.btn-students').click(function(){
-				//$('.working-area').html('')
-				$('.working-area').load('/app_classway/app_view_students/');
-
-			})
-
-
-			// back btn
-			$('.btn-back').click(function () {
-				$.ajax({
-					url: '/app_classway/app_available_class',
-
-					success: function (result) {
-						console.log('success back btn in classdetails...');
-						$('.working-area').html(result);
-					}
-				});
-			});
-
-
-
-
-
-
-			/*$('.btn-performance').click(function () {
-				$('.user_class_classdetails').load('/app_classway/app_class_performance');
-
-			});*/
-
-			/*$('.row-link').click(function () {
-				$('.user_class_classdetails').load('/app_classway/app_view_question');
-
-			});*/
-
-
-		});
-
-	</script>
+        });
+    </script>
 
 
 

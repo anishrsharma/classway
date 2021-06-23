@@ -683,6 +683,13 @@ def app_class_details_enrolled(request):
         obj_qn = Question.objects.filter(class_id=class_id)
         # print(obj_qn)
 
+        list_done_ans = []
+        obj_qn = Question.objects.filter()
+
+        obj_ans = Answer.objects.filter()
+
+
+
         responseData = {
             # 'id': 4,
             # 'name': 'Test Response',
@@ -697,7 +704,10 @@ def app_class_details_enrolled(request):
     else:
 
         print('get')
-        return render(request, 'temp_app_classway/app_class_details_enrolled.html', {'obj_class': obj_class, 'obj_qn': obj_qn})
+        return render(request, 'temp_app_classway/app_class_details_enrolled.html', {
+            'obj_class': obj_class,
+            'obj_qn': obj_qn
+        })
 
     # return render(request, 'temp_app_classway/app_class_details_enrolled.html')
 
@@ -837,7 +847,7 @@ def app_join_class(request):
                     print('current_user_id:', current_user_id)
                     print('class_admin:', class_admin)
 
-                    # here current_user_id was integer therefore needed to convert inti string
+                    # here current_user_id was integer therefore needed to convert into string
                     if class_admin == str(current_user_id):
                         print('admin cannot enroll')
                         msg = 'admin cannot enroll...'
@@ -1122,23 +1132,126 @@ def app_edit_class(request):
 
 
 def app_view_students(request):
-    return render(request, 'temp_app_classway/app_view_students.html')
+    
+
+    if request.method == 'POST':
+
+        global class_id
+        global obj_studs
+        global subject
+        
+        shit_data = request.POST.get('getdata', 'None')
+
+        print('shit_data',shit_data)
+
+        bad_char = ['"']
+        for i in bad_char:
+            x = shit_data.replace(i, '')
+        class_id = int(x)
+        print(class_id)
+
+
+        obj_studs = Enroll.objects.filter(class_id = class_id)
+        print('obj_studs:',obj_studs)
+
+        for i in obj_studs:
+            print(i.user_id.first_name)
+
+        
+        obj_class_info = Class.objects.get(id = class_id)
+        # print('obj_class_info:',obj_class_info.class_subject)
+        subject = obj_class_info.class_subject
+
+
+        responseData = {
+                'data': 'response from app_view_studs...'
+                # 'class_name': class_name
+        }
+
+        return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+    
+    
+    else:
+        return render(request, 'temp_app_classway/app_view_students.html',{
+            'obj_studs':obj_studs,
+            'subject':subject
+        })
+
+
+def app_remove_student(request):
+
+    if request.method == 'POST':
+        print("post")
+
+        shit_data1 = request.POST.get('getdata1', 'None')
+        shit_data2 = request.POST.get('getdata2', 'None')
+
+        print(shit_data1)
+        print(shit_data2)
+        bad_char = ['"']
+
+        for i in bad_char:
+            x = shit_data1.replace(i, '')
+        
+        for i in bad_char:
+            y = shit_data2.replace(i, '')
+
+        global class_id
+
+        stud_id = int(x)
+        class_id = int(y)
+
+        print('stud_id',stud_id)
+        print('class_id',class_id)
+
+
+        remove_stud = Enroll.objects.get(class_id  = class_id, user_id = stud_id)
+        remove_stud.delete()
+
+
+        global stud_name
+        stud_name = remove_stud.user_id.first_name
 
 
 
 
 
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////
+        responseData = {
+                'data': 'response from app_remove_stud...'
+                # 'class_name': class_name
+        }
 
+        return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+
+    else:
+        print('get')
+
+        obj_studs = Enroll.objects.filter(class_id = class_id)
+        # print('obj_studs:',obj_studs)
+
+        return render(request, 'temp_app_classway/app_view_students.html',{
+            'obj_studs':obj_studs,
+            'subject':subject,
+            'stud_name':stud_name
+        })
+
+
+
+
+
+
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////
 

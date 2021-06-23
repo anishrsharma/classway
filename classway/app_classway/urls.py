@@ -39,6 +39,9 @@ urlpatterns = [
 
     path('app_add_answer_todo/', views.app_add_answer_todo, name="app_add_answer_todo"),
 
+    path('app_remove_student/', views.app_remove_student, name="app_remove_student"),
+
+
 
 
 
