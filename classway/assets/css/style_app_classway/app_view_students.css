@@ -20,6 +20,16 @@
     overflow: auto;
 }
 
+.app-view-students .fa {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 10px;
+    color: #e05297;
+}
+
 .app-view-students h3 {
     text-transform: uppercase;
     color: rgb(3, 80, 111);

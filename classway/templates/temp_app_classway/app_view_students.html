@@ -18,6 +18,13 @@
 <body>
 
     <div class="app-view-students">
+
+        <abbr title="back">
+			<a href="javascript:void(0)" class="btn-back">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</abbr>
+
         <h3>{{subject}} - student list</h3>
 
         <table>
@@ -106,6 +113,17 @@
             });
 
         }
+
+        $('.btn-back').click(function() {
+            $.ajax({
+                url: '/app_classway/app_class_details/',
+
+                success: function(result) {
+                    console.log('success back btn in classdetails...');
+                    $('.working-area').html(result);
+                }
+            });
+        });
     </script>
 
 
