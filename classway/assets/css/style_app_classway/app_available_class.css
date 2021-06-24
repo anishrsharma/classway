@@ -25,6 +25,7 @@
     text-align: center;
 }
 
+
 /* .user_class_availableclass hr {
     width: 95%;
     margin: auto;
@@ -34,13 +35,17 @@
     background-color: rgb(3, 80, 111,0.5);
 } */
 
+
 /* Hide scrollbar for Chrome, Safari and Opera */
+
 
 /* .user_class_availableclass::-webkit-scrollbar {
     display: none;
 } */
 
+
 /* Hide scrollbar for IE, Edge and Firefox */
+
 
 /* .user_class_availableclass {
     -ms-overflow-style: none;
@@ -67,7 +72,6 @@
     padding: 30px;
     flex-flow: wrap;
     /* flex-basis: content; */
-    
 }
 
 .user_class_availableclass .container-class a {
@@ -292,7 +296,7 @@
     }
 }
 
-.copy-text{
+.copy-text {
     transition: 0.1s;
     -webkit-transition: 0.1s;
     -moz-transition: 0.1s;
@@ -300,7 +304,7 @@
     -o-transition: 0.1s;
 }
 
-.copy-text:hover{
+.copy-text:hover {
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);

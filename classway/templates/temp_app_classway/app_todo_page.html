@@ -27,6 +27,8 @@
 
         <table>
 
+            {% if list_pendings %}
+            
             {% for obj in list_pendings %}
 
             <tr class="row-link" onclick="return getInfo('{{obj.class_id.id}}','{{obj.id}}')">
@@ -37,6 +39,13 @@
             </tr>
 
             {% endfor %}
+
+            {% else %}
+            <p style="color: rgb(3, 80, 111); font-size: 13px; position: absolute; top: 50%;">all clear ^_^</p>
+
+            {% endif %}
+
+
 
         </table>
 

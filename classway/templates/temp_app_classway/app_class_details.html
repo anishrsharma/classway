@@ -59,7 +59,7 @@
             {% for obj_class in obj_class %}
             <button type="" class="btn-addqn" onclick="return getInfo2('{{obj_class.id}}')">add question</button>
             <button type="" class="btn-students" onclick="return getInfo3('{{obj_class.id}}')">students</button>
-            <button type="" class="btn-insights">insights</button>
+            {% comment %} <button type="" class="btn-insights">insights</button> {% endcomment %}
 
 
             <button type="" class="btn-performance" onclick="performance();">performance</button> {% endfor %}
