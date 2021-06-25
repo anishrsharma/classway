@@ -683,10 +683,10 @@ def app_class_details_enrolled(request):
         obj_qn = Question.objects.filter(class_id=class_id)
         # print(obj_qn)
 
-        list_done_ans = []
-        obj_qn = Question.objects.filter()
+        # list_done_ans = []
+        # obj_qn = Question.objects.filter()
 
-        obj_ans = Answer.objects.filter()
+        # obj_ans = Answer.objects.filter()
 
 
 
