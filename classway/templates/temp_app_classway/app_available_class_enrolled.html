@@ -22,7 +22,7 @@
 
 
         <div class="container-class">
-            {% for obj_class,obj_admin in mylist_all %}
+            {% for obj_class,obj_admin,count_studs in mylist_all %}
             <div class="class-box" onclick="getInfo('{{obj_class.class_id.id}}');">
                 <div class="class-box-name">
                     <h2>
@@ -34,7 +34,7 @@
                 <div class="class-box-info">
                     <ul>
                         <li>subject: {{obj_class.class_id.class_subject}}</li>
-                        <li>students: N/A</li>
+                        <li>students: {{count_studs}}</li>
                         <li>admin: {{obj_admin}}</li>
 
 
@@ -44,7 +44,7 @@
 
                 <div class="options" style="justify-content: end;">
 
-                    <a href="javascript:void(0)" class="exit" onclick="exitClassModal('{{obj.class_id.id}}');">
+                    <a href="javascript:void(0)" class="exit" onclick="exitClassModal('{{obj_class.class_id.id}}');">
                         <abbr title="exit">
 							<i class="material-icons">logout</i>
 						</abbr>

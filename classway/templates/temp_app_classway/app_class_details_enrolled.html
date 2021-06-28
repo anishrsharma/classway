@@ -33,7 +33,7 @@
                     <th style="width: 500px;">question</th>
                     <th>date</th>
                     <th>deadline</th>
-                    <th>status</th>
+                    {% comment %} <th>status</th> {% endcomment %}
                 </tr>
 
                 {% for obj_qn in obj_qn %}
@@ -43,11 +43,11 @@
                     <td>{{obj_qn.qn_desc}}</td>
                     <td>{{obj_qn.qn_date}}</td>
                     <td>{{obj_qn.qn_deadline}}</td>
-                    <td class="row-status">
+                    {% comment %} <td class="row-status">
                         <abbr title="pending" style="display: flex;">
                             <i class="material-icons">radio_button_checked</i>
                         </abbr>
-                    </td>
+                    </td> {% endcomment %}
 
                 </tr>
 

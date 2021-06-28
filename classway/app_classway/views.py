@@ -728,6 +728,38 @@ def app_available_class_enrolled(request):
     # -----------------------------------
     # -----------------------------------
 
+
+    print('------')
+
+    list_count = []
+    for p in obj_total_enrolled_classes:
+        print(p.class_id)
+        temp = Enroll.objects.filter(class_id = p.class_id)
+        # print(temp)
+        count = 0
+        for q in temp:
+            print(q)
+            count+=1
+
+        list_count.append(count)
+
+
+    print(list_count)
+
+
+
+
+
+
+
+    # print("total students:",obj_total_enrolled_classes[0].__len__())
+    print('------')
+
+
+
+    # -----------------------------------
+    # -----------------------------------
+
     print('class admin:',obj_total_enrolled_classes[0].class_id.class_admin)
     x = obj_total_enrolled_classes[0].class_id.class_admin
     
@@ -736,14 +768,16 @@ def app_available_class_enrolled(request):
     print(obj_admin.first_name)
 
 
-  
 
 
 
 
+
+    # getting admin names into a list
     list_admin_name = []
 
     for i in obj_total_enrolled_classes:
+        print(i)
         admin_id =i.class_id.class_admin 
         obj_admin_name = User.objects.get(id = admin_id)
         name = obj_admin_name.first_name+" "+obj_admin_name.last_name
@@ -760,7 +794,7 @@ def app_available_class_enrolled(request):
 
     # zipping both the list and the object to access both simultanously:
 
-    mylist_all = zip(obj_total_enrolled_classes,list_admin_name)
+    mylist_all = zip(obj_total_enrolled_classes,list_admin_name,list_count)
     # loop iterates only one time, don't waste here
     # for i,j in mylist_all:
     #     print(i.class_id.class_name,j)
@@ -962,7 +996,10 @@ def app_add_answer(request):
                     'obj_form': obj_form,
                     'class_name': class_name,
                     'msg': msg,
-                    'qn_desc': qn_desc
+                    'qn_desc': qn_desc,
+                    'qn_marks':qn_marks,
+                    'qn_date':qn_date,
+                    'qn_deadline':qn_deadline
                 })
 
             # print('desc:',obj_form.cleaned_data['ans_desc'])
@@ -970,7 +1007,10 @@ def app_add_answer(request):
                 'obj_form': obj_form,
                 'class_name': class_name,
                 'msg': msg,
-                'qn_desc': qn_desc
+                'qn_desc': qn_desc,
+                'qn_marks':qn_marks,
+                'qn_date':qn_date,
+                'qn_deadline':qn_deadline
             })
 
         else:
