@@ -22,25 +22,22 @@
 
 
         <div class="container-class">
-
-
-            {% if obj_total_enrolled_classes %} {% for obj in obj_total_enrolled_classes %}
-
-            <div class="class-box" onclick="getInfo('{{obj.class_id.id}}');">
+            {% for obj_class,obj_admin in mylist_all %}
+            <div class="class-box" onclick="getInfo('{{obj_class.class_id.id}}');">
                 <div class="class-box-name">
                     <h2>
-                        {{obj.class_id.class_name}}
+                        {{obj_class.class_id.class_name}}
 
                     </h2>
                 </div>
 
                 <div class="class-box-info">
                     <ul>
-                        <li>subject: {{obj.class_id.class_subject}}</li>
+                        <li>subject: {{obj_class.class_id.class_subject}}</li>
                         <li>students: N/A</li>
-                        <li>admin: N/A</li>
+                        <li>admin: {{obj_admin}}</li>
 
-                        {% comment %} {% for name in list_admin_name %} {{forloop.counter0}} {{name}} {% endfor %} {% endcomment %}
+
 
                     </ul>
                 </div>
@@ -59,7 +56,7 @@
 
 
 
-            {% endfor %} {% endif %}
+            {% endfor %}
 
 
 
@@ -77,6 +74,7 @@
 
         </div>
     </div>
+
 
 
 

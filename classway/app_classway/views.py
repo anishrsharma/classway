@@ -683,10 +683,8 @@ def app_class_details_enrolled(request):
         obj_qn = Question.objects.filter(class_id=class_id)
         # print(obj_qn)
 
-        # list_done_ans = []
-        # obj_qn = Question.objects.filter()
 
-        # obj_ans = Answer.objects.filter()
+        
 
 
 
@@ -730,31 +728,66 @@ def app_available_class_enrolled(request):
     # -----------------------------------
     # -----------------------------------
 
+    print('class admin:',obj_total_enrolled_classes[0].class_id.class_admin)
+    x = obj_total_enrolled_classes[0].class_id.class_admin
+    
+    obj_admin = User.objects.get(id = x)
+
+    print(obj_admin.first_name)
+
+
+  
+
+
+
 
     list_admin_name = []
 
     for i in obj_total_enrolled_classes:
         admin_id =i.class_id.class_admin 
         obj_admin_name = User.objects.get(id = admin_id)
-        name = obj_admin_name.first_name
+        name = obj_admin_name.first_name+" "+obj_admin_name.last_name
         list_admin_name.append(name)
 
 
     
     print(list_admin_name)
 
+
     for i in list_admin_name:
         print(i)
 
-    # -----------------------------------
+
+    # zipping both the list and the object to access both simultanously:
+
+    mylist_all = zip(obj_total_enrolled_classes,list_admin_name)
+    # loop iterates only one time, don't waste here
+    # for i,j in mylist_all:
+    #     print(i.class_id.class_name,j)
+
+    # print(mylist_all)
+
+
+    # for k,p in mylist_all:
+    #     print(k.class_id.class_name,p)
+
+
+
+    # -----------------------
+    # ------------
     # -----------------------------------
 
-    print('------------------')
+    # print('------------------')
 
-    for index, item in enumerate(obj_total_enrolled_classes):
-        print(index)
-        print(item.class_id.class_name)
-        print(list_admin_name[index])
+
+    # list_x = [[2,3,4],[1,2,3]]
+
+
+
+    # for index, item in enumerate(obj_total_enrolled_classes):
+    #     print(index)
+    #     print(item.class_id.class_name)
+    #     print(list_admin_name[index])
 
 
 
@@ -782,10 +815,10 @@ def app_available_class_enrolled(request):
 
 
 
-    if obj_total_enrolled_classes:
+    if mylist_all:
         return render(request, 'temp_app_classway/app_available_class_enrolled.html', {
-            'obj_total_enrolled_classes': obj_total_enrolled_classes,
-            'list_admin_name':list_admin_name
+            'mylist_all': mylist_all,
+            'test':'test'
         })
     else:
         return render(request, 'temp_app_classway/app_no_enrolled_class.html')
