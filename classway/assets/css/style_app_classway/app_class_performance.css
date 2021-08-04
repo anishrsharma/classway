@@ -1,10 +1,8 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
-
 
 .user_class_classperformance {
     width: 100%;
@@ -16,6 +14,7 @@
     align-items: center;
     justify-content: center;
     color: #0a043c;
+    position: relative;
 }
 
 .user_class_classperformance .fa {
@@ -46,7 +45,8 @@
     color: #eeeeee;
 }
 
-.user_class_classperformance td, th {
+.user_class_classperformance td,
+th {
     border: none;
     /* border-bottom: 1px solid white; */
     padding: 9px;
@@ -63,7 +63,6 @@
     top: 0;
     background-color: #03506f;
     text-align: center;
-    
 }
 
 @media(max-width: 400px) {

@@ -77,7 +77,96 @@ def app_no_class(request):
 
 
 def app_class_performance(request):
-    return render(request, 'temp_app_classway/app_class_performance.html')
+
+    if request.method == 'POST':
+        shit_data = request.POST.get('getdata', 'None')
+
+        bad_char = ['"']
+        for i in bad_char:
+            x = shit_data.replace(i, '')
+
+        class_id = int(x)
+
+        print("class_id",class_id)
+
+
+        obj_stud_list = Enroll.objects.filter(class_id = class_id)
+
+        print(obj_stud_list)
+
+        list_stud_name = []
+        list_stud_email = []
+
+        for i in obj_stud_list:
+            # print(i.user_id.first_name+" "+i.user_id.last_name)
+            list_stud_name.append(i.user_id.first_name+" "+i.user_id.last_name)
+            list_stud_email.append(i.user_id.email)
+
+
+        print(list_stud_name)
+        print(list_stud_email)
+
+
+        # ---------------------------------------
+
+        obj_qns = Question.objects.filter(class_id = class_id)
+
+
+
+
+        print(obj_qns)
+
+
+        
+
+
+
+        # -----------------------------
+
+        # list_qn_id = []
+        # list_stud = []
+        # list_total_attempt = []
+        # for i, j in enumerate(obj_qns):
+        #     list_qn_id.append(j.id)
+        #     print("---------")
+
+        #     obj_user = Answer.objects.filter(qn_id=list_qn_id[i])
+
+        #     list_stud.append(obj_user)            
+        #     print("obj_user",obj_user)
+
+        #     print("len:",obj_user.__len__())
+
+        #     list_total_attempt.append(0)
+
+        #     for k in obj_user:
+        #         obj_user_total_ans = Answer.objects.filter(qn_id=list_qn_id[i])
+        #         print(obj_user_total_ans)
+        #         list_total_attempt[i] += 1
+
+
+        # # print("list_stud:",list_stud)
+        # print("obj_qns:",obj_qns)
+        # print("list_total_attempt:",list_total_attempt)
+
+        # ---------------------------------------
+
+
+
+
+
+        responseData = {
+            'page': 'hii response...'
+        }
+
+        return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+
+    else:
+        return render(request, 'temp_app_classway/app_class_performance.html')
+
+
+
 
 # ***
 
